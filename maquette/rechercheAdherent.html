@@ -13,17 +13,16 @@
 	<link rel="stylesheet" media="screen and (max-width:800px)" type="text/css" href="css/rechercheMedia_tel.css" >
 </head>
 <body class="container">
-
+	<header class="row jumbotron">
+		<div class="col-md-10 col-md-offset-1 col-xs-12">
+			<h1>Mediatic<small class="hidden-xs"> Recherche d'un adhérent</small></h1>
+		</div>
+		<div class="visible-xs-block col-xs-12">
+			<h1><small> Recherche d'adhérents</small></h1>
+		</div>
+	</header>
 	
-		<header class="row jumbotron">
-			<div class="col-md-10 col-md-offset-1 col-xs-12">
-				<h1>Mediatic<small class="hidden-xs"> Recherche d'un adhérent</small></h1>
-			</div>
-			<div class="visible-xs-block col-xs-12">
-				<h1><small> Recherche d'un adhérent</small></h1>
-			</div>
-		</header>
-		<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<!-- Menu Tablette, PC -->
 			<ul class="hidden-xs nav navbar-nav">
@@ -57,117 +56,95 @@
 			</ul>
 		</div>
 	</nav>
+	
+	<main>
 		<section class="bouton_new row">
 			<div class="col-md-12">
 				<a href="creationAdherent.html"><button class="btn btn-primary" >Nouveau <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></a>
+			</div>
+		</section>
 		
+		<section class=" main row">
+			<div class="col-md-4" >
+				<div class="search">
+					<form>
+						<div class="form-group">
+							<label class="hidden-xs">Identifiant</label><br/>
+							<input class="form-control" type="text" placeholder="Commence par..."/>
+						</div>
+						<div class="form-group">
+							<label class="hidden-xs">Nom</label><br/>
+							<input class="form-control" type="text" placeholder="Contient..."/>
+						</div>
+						<button class="btn btn-info">Rechercher</button>
+					</form>
+				</div>
 			</div>
 			
-		</section>
-		<section class=" main row">
-			
-				<div class="col-md-4" >
-					
-					<div class="search">
-						<form>
-							<div class="form-group">
-								<label class="hidden-xs">Identifiant</label><br/>
-								<input class="form-control" type="text" placeholder="Commence par..."/>
-							</div>
-							<div class="form-group">
-								<label class="hidden-xs">Nom</label><br/>
-								<input class="form-control" type="text" placeholder="Contient..."/>
-							</div>
+			<div class=" tableau col-md-8">
+				<span class="titre_tab">Liste des Adhérents</span>
+				<div class="responsive-table-line">
+					<table class="hidden-xs table table-hover table-bordered ">
+						<thead>
+							<tr class="entete" >
+								<th><a href="">Identifiant <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+								<th><a href="">Nom <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+								<th><a href="">Prénom <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
+								<th ><a href="">Date de naissance <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+								<th ><a href="">A jour cotisation? <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
+								<th ><a href="">Nbre médias en possession<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td data-title="Titre"><a href="">dddddd</a></td>
+								<td data-title="Type"><a href="">dddddddd</a></td>
+								<td data-title="Auteur"><a href="">dddddd</a></td>
+								<td data-title="Emprunté par"><a href="">dddddddd</a></td>
+								<td data-title="Date de retour"><a href="">dddddd</a></td>
+								<td data-title="Date de retour"><a href="">dddddd</a></td>
 							
-							<button class="btn btn-info">Rechercher</button>
-						
-						</form>
+							</tr>
+							<tr>
+								<td data-title="Titre"><a href="">dddddd</a></td>
+								<td data-title="Type"><a href="">dddddddd</a></td>
+								<td data-title="Auteur"><a href="">dddddd</a></td>
+								<td data-title="Emprunté par"><a href="">dddddddd</a></td>
+								<td data-title="Date de retour"><a href="">dddddd</a></td>
+								<td data-title="Date de retour"><a href="">dddddd</a></td>
+							</tr>
+							<tr>
+								<td data-title="Titre"><a href="">dddddd</a></td>
+								<td data-title="Type"><a href="">dddddddd</a></td>
+								<td data-title="Auteur"><a href="">dddddd</a></td>
+								<td data-title="Emprunté par"><a href="">dddddddd</a></td>
+								<td data-title="Date de retour"><a href="">dddddd</a></td>
+								<td data-title="Date de retour"><a href="">dddddd</a></td>
+							</tr>
+						</tbody>
+					</table>
 					
+					<div class="list visible-xs-block row" >
+						<div class="col-xs-6">
+							<label>Identifiant: </label></span><li class=""> dddddd</li><br>
+							<label>Nom: </label><li> dddddddd</li><br>
+							<label>Prenom: </label> <li> dddddd</li><br>
+							<label>Date de naissance: </label><li> dddddddd</li><br>
+							<label>A jour cotisation: </label><li> dddddd</li><br>
+							<label>Nombre médias en possession: </label><li> dddddd</li><br>
+						</div>
+						<div class="col-xs-6">
+							<label>Identifiant: </label></span><li class=""> dddddd</li><br>
+							<label>Nom: </label><li> dddddddd</li><br>
+							<label>Prenom: </label> <li> dddddd</li><br>
+							<label>Date de naissance: </label><li> dddddddd</li><br>
+							<label>A jour cotisation: </label><li> dddddd</li><br>
+							<label>Nombre médias en possession: </label><li> dddddd</li><br>
+						</div>
 					</div>
 				</div>
-				<div class=" tableau col-md-8">
-						<span class="titre_tab">Liste des Adhérents</span>
-						<div class="responsive-table-line">
-							<table class="hidden-xs table table-hover table-bordered ">
-								<thead>
-									<tr class="entete" >
-										<th><a href="">Identifiant <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
-										<th><a href="">Nom <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
-										<th><a href="">Prénom <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
-										<th ><a href="">Date de naissance <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
-										<th ><a href="">A jour cotisation? <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
-										<th ><a href="">Nbre médias en possession<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr >
-										<td data-title="Titre"><a href="">dddddd</a></td>
-										<td data-title="Type"><a href="">dddddddd</a></td>
-										<td data-title="Auteur"><a href="">dddddd</a></td>
-										<td data-title="Emprunté par"><a href="">dddddddd</a></td>
-										<td data-title="Date de retour"><a href="">dddddd</a></td>
-										<td data-title="Date de retour"><a href="">dddddd</a></td>
-									
-									</tr>
-									<tr>
-										<td data-title="Titre"><a href="">dddddd</a></td>
-										<td data-title="Type"><a href="">dddddddd</a></td>
-										<td data-title="Auteur"><a href="">dddddd</a></td>
-										<td data-title="Emprunté par"><a href="">dddddddd</a></td>
-										<td data-title="Date de retour"><a href="">dddddd</a></td>
-										<td data-title="Date de retour"><a href="">dddddd</a></td>
-									</tr>
-									<tr>
-										<td data-title="Titre"><a href="">dddddd</a></td>
-										<td data-title="Type"><a href="">dddddddd</a></td>
-										<td data-title="Auteur"><a href="">dddddd</a></td>
-										<td data-title="Emprunté par"><a href="">dddddddd</a></td>
-										<td data-title="Date de retour"><a href="">dddddd</a></td>
-										<td data-title="Date de retour"><a href="">dddddd</a></td>
-									</tr>
-									
-									
-								</tbody>
-							
-							</table>
-							<div class="list visible-xs-block row" >
-										
-										<div class="col-xs-6">
-											<label>Identifiant: </label></span><li class=""> dddddd</li><br>
-											<label>Nom: </label><li> dddddddd</li><br>
-											<label>Prenom: </label> <li> dddddd</li><br>
-											<label>Date de naissance: </label><li> dddddddd</li><br>
-											<label>A jour cotisation: </label><li> dddddd</li><br>
-											<label>Nombre médias en possession: </label><li> dddddd</li><br>
-											
-											
-										</div>
-										<div class="col-xs-6">
-											<label>Identifiant: </label></span><li class=""> dddddd</li><br>
-											<label>Nom: </label><li> dddddddd</li><br>
-											<label>Prenom: </label> <li> dddddd</li><br>
-											<label>Date de naissance: </label><li> dddddddd</li><br>
-											<label>A jour cotisation: </label><li> dddddd</li><br>
-											<label>Nombre médias en possession: </label><li> dddddd</li><br>
-										</div>
-							
-							</div>
-							
-							
-						</div>
-						
-				</div>
-		
+			</div>
 		</section>
-		
-		<footer>
-				
-		</footer>
-	
-
-
-
-
+	</main>
 </body>
 </html>
-
