@@ -3,13 +3,12 @@
 	margin-left:10px;
 }
 
-.list div{
-	
+.list {
 	
 	padding:5px;
-	width:300px;
 	border:1px solid grey;
-	margin:10px;	
+	margin:5px;	
+	
 }
 .list li{
 	
@@ -17,6 +16,8 @@
 	list-style:none;
 	display:inline;
 }
+
+
 
 /*.responsive-table-line td:before {
 
