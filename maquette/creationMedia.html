@@ -62,33 +62,36 @@
 	</nav>
 	<main>
 		<form method="GET" action="." class="form-horizontal">
-			<div class="form-group">
-				<label for="titre" class="control-label col-sm-3 hidden-xs">Titre</label>
-				<div class="col-sm-6 col-xs-12"> 
-					<input type="text" class="form-control" placeholder="Titre" name="titre" required="required">
+			<fieldset>
+				<legend>Créer un média</legend>
+				<div class="form-group">
+					<label for="titre" class="control-label col-sm-3 hidden-xs">Titre</label>
+					<div class="col-sm-6 col-xs-12"> 
+						<input type="text" class="form-control" placeholder="Titre" name="titre" required="required">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="auteur" class="control-label col-sm-3 hidden-xs">Auteur</label>
-				<div class="col-sm-6 col-xs-12">
-					<input type="text" class="form-control" placeholder="Auteur" name="auteur" required="required">
+				<div class="form-group">
+					<label for="auteur" class="control-label col-sm-3 hidden-xs">Auteur</label>
+					<div class="col-sm-6 col-xs-12">
+						<input type="text" class="form-control" placeholder="Auteur" name="auteur" required="required">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="type" class="control-label col-sm-3 hidden-xs">Type</label>
-				<div class="col-sm-6 col-xs-12">
-					<select name="selectType" class="form-control">
-						<option>Livre</option>
-						<option>CD</option>
-						<option>DVD</option>
-					</select>
+				<div class="form-group">
+					<label for="type" class="control-label col-sm-3 hidden-xs">Type</label>
+					<div class="col-sm-6 col-xs-12">
+						<select name="selectType" class="form-control">
+							<option>Livre</option>
+							<option>CD</option>
+							<option>DVD</option>
+						</select>
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-xs-12 col-sm-offset-3">
-					<input class="btn btn-default" type="submit" value="Enregistrer">
+				<div class="form-group">
+					<div class="col-xs-12 col-sm-offset-3">
+						<input class="btn btn-default" type="submit" value="Enregistrer">
+					</div>
 				</div>
-			</div>
+			</fieldset>
 		</form>
 	</main>
 </body>
