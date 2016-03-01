@@ -1,0 +1,9 @@
+.tableau {
+	border-bottom : 1px;
+}
+
+a:visited, a:link{
+	
+	list-style:none;
+	color:black;
+}
