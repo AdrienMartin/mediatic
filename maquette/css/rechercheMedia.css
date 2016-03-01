@@ -39,7 +39,7 @@ li{
 	text-decoration:none;
 }
 
-a{
+a:link, a:visited{
 	
 	list-style:none;
 	color:black;

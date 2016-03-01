@@ -11,7 +11,12 @@
 	border:1px solid grey;
 	margin:10px;	
 }
-
+.list li{
+	
+	text-decoration:none;
+	list-style:none;
+	display:inline;
+}
 
 /*.responsive-table-line td:before {
 
