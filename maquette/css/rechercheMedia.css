@@ -4,27 +4,10 @@ html,body{
 	
 }
 
-.master{
-	
-	margin: 0 auto;
-	width:70%;
-	box-shadow:5px 5px 6px silver;
-	
-}
-.main{
-	margin:10px;
-	overflow:hidden;
-	
-}
-
 header{
 	
 	height:auto;
 }
-/*footer{
-	background-color:rgba(40, 130, 123, 0.3);
-	padding:5px;
-}*/
 
 .titre_tab{
 	
