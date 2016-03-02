@@ -31,6 +31,15 @@
 		afficheDateDispo();
 		initDateEmprunt();
 		calculDateRetour();
+
+		// calcul date retour automatique
+		$('input.dateEmprunt').change(function() {
+			var dateRetour = new Date($('input.dateEmprunt').val());
+			dateRetour.setDate(dateRetour.getDate() + 30);
+			$('.dateRetour').val(formaterDateInput(dateRetour));
+		});
+
+
 	});
 	
 	function initInfo()

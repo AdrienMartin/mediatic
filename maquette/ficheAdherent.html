@@ -19,7 +19,40 @@
 <script src="bootstrap/js/jquery-1.12.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+	"use strict";
+	
+	function formaterDateInput(date){
+		// format string au format date pour l'input Date
+		var day = ("0" + date.getDate()).slice(-2);
+		var month = ("0" + (date.getMonth()+1)).slice(-2);
+		return (date.getFullYear() + '-' + month + '-' + day);
+	}
 
+	function dateEmpruntToday(){
+		var today = formaterDateInput(new Date());
+		$('input.dateEmprunt').val(today);
+	}
+
+	function calculDateRetour(){
+		var dateRetour = new Date($('input.dateEmprunt').val());
+		dateRetour.setDate(dateRetour.getDate() + 30);
+		$('.dateRetour').val(formaterDateInput(dateRetour));
+	}
+
+	$(function() {
+		dateEmpruntToday();
+		calculDateRetour();
+
+		// calcul date retour automatique
+		$('input.dateEmprunt').change(function() {
+			var dateRetour = new Date($('input.dateEmprunt').val());
+			dateRetour.setDate(dateRetour.getDate() + 30);
+			$('.dateRetour').val(formaterDateInput(dateRetour));
+		});
+	});
+
+</script>
 
 </head>
 <body class="container">
@@ -154,7 +187,11 @@
 				</div>
 				<div class="form-group">
 					<label for="dateEmprunt" class="hidden-xs">Date emprunt</label>
-					<input type="date" class="form-control" name="dateEmprunt" required="required">
+					<input type="date" class="form-control dateEmprunt" name="dateEmprunt" required="required">
+				</div>
+				<div class="form-group">
+					<label for="dateRetour" class="hidden-xs">Date de retour</label>
+					<input type="date" class="form-control dateRetour" name="dateRetour" readonly>
 				</div>
 				<button type="submit" class="btn btn-default">Ajouter</button>
 			</fieldset>

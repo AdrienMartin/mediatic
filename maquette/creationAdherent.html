@@ -57,6 +57,12 @@
 				$('#age').val('?');
 			}
 		});
+
+		// calcul date fin abonnement automatique
+		$('#datePaiement').change(function() {
+			calculDateFinAbonnement();
+		});
+
 	});
 </script>
 </head>
