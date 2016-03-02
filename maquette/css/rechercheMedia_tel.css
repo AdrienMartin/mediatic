@@ -1,22 +1,36 @@
-.list{
+
+.titre_tab{
 	
-	margin-left:10px;
+	margin:10px;
 }
 
 .list {
 	
-	padding:5px;
-	border:1px solid grey;
+	padding:8px;
+	/*border:1px solid grey;*/
 	margin:5px;	
+	margin-bottom:12px;
+	border-radius:8px;
+	background-color:rgba(147, 122, 103, 0.3);
+}
+.grille .col-xs-6{
 	
+	padding-left:none;
 }
 .list li{
 	
 	text-decoration:none;
-	list-style:none;
 	display:inline;
 }
-
+.tableau a:hover{
+	
+	text-decoration:none;
+}
+.list:hover{
+	
+		box-shadow:5px 5px 5px 6px rgba(147, 122, 103, 0.3);
+		list-style:none;
+}
 
 
 /*.responsive-table-line td:before {

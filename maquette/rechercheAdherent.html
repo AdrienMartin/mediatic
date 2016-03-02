@@ -11,6 +11,18 @@
 	<script src="bootstrap/js/bootstrap.min.js" ></script>
 	<link rel="stylesheet" type="text/css" href="css/rechercheMedia.css">
 	<link rel="stylesheet" media="screen and (max-width:800px)" type="text/css" href="css/rechercheMedia_tel.css" >
+	<script>
+	
+		jQuery(document).ready(function($){
+		    $('#cotisation').tooltip({
+		        animation: true,
+		        html: true,
+		        placement: 'bottom'
+		    });
+	   });
+	
+	</script>
+	
 </head>
 <body class="container">
 	<header class="row jumbotron">
@@ -73,7 +85,7 @@
 							<input class="form-control" type="text" placeholder="Commence par..."/>
 						</div>
 						<div class="form-group">
-							<label >Nom</label><br/>
+							<label >Nom / Prénom</label><br/>
 							<input class="form-control" type="text" placeholder="Contient..."/>
 						</div>
 						<button class="btn btn-info">Rechercher</button>
@@ -91,62 +103,75 @@
 								<th><a href="">Nom <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
 								<th><a href="">Prénom <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
 								<th ><a href="">Date de naissance <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
-								<th ><a href="">A jour cotisation? <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
+								<th ><a id="cotisation" href="" title="A jour cotisation"><span class="glyphicon glyphicon-euro" aria-hidden="true"></span> <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
 								<th ><a href="">Nbre médias en possession<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td data-title="Titre"><a href="">dddddd</a></td>
-								<td data-title="Type"><a href="">dddddddd</a></td>
-								<td data-title="Auteur"><a href="">dddddd</a></td>
-								<td data-title="Emprunté par"><a href="">dddddddd</a></td>
-								<td data-title="Date de retour"><a href="">dddddd</a></td>
-								<td data-title="Date de retour"><a href="">dddddd</a></td>
+							<tr onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">	
+								<td >15866</td>
+								<td >Larboulette</td>
+								<td >Pierre </td>
+								<td >10/11/1986</td>
+								<td ><img src="img/valid.gif" /></td>
+								<td >1</td>
 							
 							</tr>
-							<tr>
-								<td data-title="Titre"><a href="">dddddd</a></td>
-								<td data-title="Type"><a href="">dddddddd</a></td>
-								<td data-title="Auteur"><a href="">dddddd</a></td>
-								<td data-title="Emprunté par"><a href="">dddddddd</a></td>
-								<td data-title="Date de retour"><a href="">dddddd</a></td>
-								<td data-title="Date de retour"><a href="">dddddd</a></td>
+							<tr  onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
+								<td >145</td>
+								<td>Gerard</td>
+								<td >Sarah</td>
+								<td >01/01/1994</td>
+								<td ><img src="img/valid.gif" /></td>
+								<td >1</td>
 							</tr>
-							<tr>
-								<td data-title="Titre"><a href="">dddddd</a></td>
-								<td data-title="Type"><a href="">dddddddd</a></td>
-								<td data-title="Auteur"><a href="">dddddd</a></td>
-								<td data-title="Emprunté par"><a href="">dddddddd</a></td>
-								<td data-title="Date de retour"><a href="">dddddd</a></td>
-								<td data-title="Date de retour"><a href="">dddddd</a></td>
+							<tr  onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
+								<td >325</td>
+								<td >Parker</td>
+								<td >Matt</td>
+								<td >15/04/1970</td>
+								<td ><img src="img/sup.gif" /></td>
+								<td >1</td>
 							</tr>
 						</tbody>
 					</table>
 					
-					<div class="visible-xs-block row" >
+					<div class="grille visible-xs-block row" >
 						<div class="col-xs-6">
-							<div class="list">
-								<label>Identifiant: </label><li class=""> dddddd</li><br>
-								<label>Nom: </label><li> dddddddd</li><br>
-								<label>Prenom: </label> <li> dddddd</li><br>
-								<label>Date de naissance: </label><li> dddddddd</li><br>
-								<label>A jour cotisation: </label><li> dddddd</li><br>
-								<label>Nombre médias en possession: </label><li> dddddd</li><br>
+							<a href="ficheAdherent.html"><div class="list">
+								<label>Identifiant: </label><li class=""> 15866</li><br>
+								<label>Nom: </label><li> Larboulette</li><br>
+								<label>Prenom: </label> <li> Pierre</li><br>
+								<label>Date de naissance: </label><li> 10/11/1986</li><br>
+								<label>A jour cotisation: </label><li> <img src="img/valid.gif" /></li><br>
+								<label>Nombre médias en possession: </label><li> 1</li><br>
 							
-							</div>
+							</div></a>
 							
 						</div>
 						<div class="col-xs-6">
-							<div class="list">
-								<label>Identifiant: </label><li class=""> dddddd</li><br>
-								<label>Nom: </label><li> dddddddd</li><br>
-								<label>Prenom: </label> <li> dddddd</li><br>
-								<label>Date de naissance: </label><li> dddddddd</li><br>
-								<label>A jour cotisation: </label><li> dddddd</li><br>
-								<label>Nombre médias en possession: </label><li> dddddd</li><br>
+						
+							<a href="ficheAdherent.html"><div class="list">
+								<label>Identifiant: </label><li class=""> 145</li><br>
+								<label>Nom: </label><li> Gerard</li><br>
+								<label>Prenom: </label> <li> Sarah</li><br>
+								<label>Date de naissance: </label><li> 01/01/1994</li><br>
+								<label>A jour cotisation: </label><li><img src="img/valid.gif" /></li><br>
+								<label>Nombre médias en possession: </label><li> 1</li><br>
 							
-							</div>
+							</div></a>
+						</div>
+						<div class="col-xs-6">
+						
+							<a href="ficheAdherent.html"><div class="list">
+								<label>Identifiant: </label><li class=""> 325</li><br>
+								<label>Nom: </label><li> Parker</li><br>
+								<label>Prenom: </label> <li> Matt</li><br>
+								<label>Date de naissance: </label><li> 15/04/1970</li><br>
+								<label>A jour cotisation: </label><li><img src="img/sup.gif" /></li><br>
+								<label>Nombre médias en possession: </label><li> 1</li><br>
+							
+							</div></a>
 						</div>
 					</div>
 				</div>
