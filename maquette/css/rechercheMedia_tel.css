@@ -12,6 +12,7 @@
 	margin-bottom:12px;
 	border-radius:8px;
 	background-color:rgba(147, 122, 103, 0.3);
+	border:1px solid rgba(147, 122, 103, 0.3);
 }
 .grille .col-xs-6{
 	
@@ -28,8 +29,9 @@
 }
 .list:hover{
 	
-		box-shadow:5px 5px 5px 6px rgba(147, 122, 103, 0.3);
-		list-style:none;
+		box-shadow:5px 5px 5px 6px rgba(147, 122, 103, 0.2);
+
+		border-color: rgba(147, 122, 103, 1);
 }
 
 
