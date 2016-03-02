@@ -31,7 +31,7 @@ header{
 	/*background-color:;*/
 	font-size:18px;
 	font-weigth:bold;
-	margin-bottom:10px;
+	margin-bottom:15px;
 }
 
 li{
@@ -54,7 +54,7 @@ a:link, a:visited{
 }
 .tableau td{
 	
-	width:600px;
+	auto;
 	
 }
 .entete{
@@ -79,3 +79,12 @@ a:link, a:visited{
 	padding-left:none;
 	
 }
+.bouton_new a{
+	
+	margin:10px;
+}
+.tableau{
+	
+	margin-left:18px;
+}
+
