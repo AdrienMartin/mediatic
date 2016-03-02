@@ -30,6 +30,7 @@
 		initInfo();
 		afficheDateDispo();
 		initDateEmprunt();
+		calculDateRetour();
 	});
 	
 	function initInfo()
@@ -71,6 +72,14 @@
 		var month = ("0" + (date.getMonth()+1)).slice(-2);
 		return (day + '/' + month + '/' + date.getFullYear());
 	}
+
+	function formaterDateInput(date){
+		// format string au format date pour l'input Date
+		var day = ("0" + date.getDate()).slice(-2);
+		var month = ("0" + (date.getMonth()+1)).slice(-2);
+		return (date.getFullYear() + '-' + month + '-' + day);
+	}
+
 	
 	function afficheDateDispo()
 	{
@@ -91,13 +100,28 @@
 		{
 			if(dateDispo != undefined && dateDispo > new Date())
 			{
-				elementDate.val(formaterDate(dateDispo));
+				elementDate.val(formaterDateInput(dateDispo));
 			}
 			else
 			{
-				elementDate.val(formaterDate(new Date()));
+				elementDate.val(formaterDateInput(new Date()));
 			}
 		}
+	}
+
+	function calculDateRetour(){
+		var dateRetour = new Date($('input.dateEmprunt').val());
+		switch (typeMedia)
+		{
+			case "DVD":
+			case "CD":
+				dateRetour.setDate(dateRetour.getDate() + 15);
+				break;
+			case "Livre":
+				dateRetour.setDate(dateRetour.getDate() + 30);
+				break;
+		}
+		$('.dateRetour').val(formaterDateInput(dateRetour));
 	}
 </script>
 
@@ -203,6 +227,10 @@
 				<div class="form-group">
 					<label for="dateEmprunt" class="hidden-xs">Date emprunt</label>
 					<input type="date" class="form-control dateEmprunt" name="dateEmprunt" required="required">
+				</div>
+				<div class="form-group">
+					<label for="dateRetour" class="hidden-xs">Date de retour</label>
+					<input type="date" class="form-control dateRetour" name="dateRetour" readonly>
 				</div>
 				<button type="submit" class="btn btn-default">Ajouter</button>
 			</fieldset>
