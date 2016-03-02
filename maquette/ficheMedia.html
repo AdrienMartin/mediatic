@@ -17,6 +17,90 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="bootstrap/js/jquery-1.12.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+	"use strict";
+	//variable de test
+	var dateDispo = new Date(2017, 4, 19);
+	var typeMedia = 'Livre';
+	var titreMedia = 'La Bible';
+	var auteurMedia = 'Jésus de Nazareth';
+	
+	$(function(){
+		initInfo();
+		afficheDateDispo();
+		initDateEmprunt();
+	});
+	
+	function initInfo()
+	{
+		var elementType = $('span.infoType');
+		var elementTitre = $('span.infoTitre');
+		var elementAuteur = $('span.infoAuteur');
+		if(elementType != undefined)
+		{
+			var x;
+			switch (typeMedia)
+			{
+				case "Livre":
+					x = " glyphicon glyphicon-book";
+					break;
+				case "CD":
+					x = " glyphicon glyphicon-music";
+					break;
+				case "DVD":
+					x = " glyphicon glyphicon-film";
+					break;
+			}
+			elementType.addClass(x);
+		}
+		if(elementTitre != undefined)
+		{
+			elementTitre.html(titreMedia);
+		}
+		if(elementAuteur != undefined)
+		{
+			elementAuteur.html(auteurMedia);
+		}
+	}
+	
+	function formaterDate(date)
+	{
+		// format string au format date
+		var day = ("0" + date.getDate()).slice(-2);
+		var month = ("0" + (date.getMonth()+1)).slice(-2);
+		return (day + '/' + month + '/' + date.getFullYear());
+	}
+	
+	function afficheDateDispo()
+	{
+		var elementDate = $('.alert>span.dateDispo');
+		if(elementDate != undefined)
+		{
+			if(dateDispo != undefined)
+			{
+				elementDate.html(formaterDate(dateDispo));
+			}
+		}
+	}
+	
+	function initDateEmprunt()
+	{
+		var elementDate = $('input.dateEmprunt');
+		if(elementDate != undefined)
+		{
+			if(dateDispo != undefined && dateDispo > new Date())
+			{
+				elementDate.val(formaterDate(dateDispo));
+			}
+			else
+			{
+				elementDate.val(formaterDate(new Date()));
+			}
+		}
+	}
+</script>
+
 </head>
 <body class="container">
 	<header class="row jumbotron">
@@ -27,6 +111,7 @@
 			<h1><small>Fiche média</small></h1>
 		</div>
 	</header>
+	
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<!-- Menu Tablette, PC -->
@@ -61,14 +146,52 @@
 			</ul>
 		</div>
 	</nav>
+	
 	<main>
 		<div>
-			<h3>La Bible<small> par Jésus de Nazareth (Livre)</small></h3>
+			<h3>
+				<span class="infoType"> </span>
+				<span class=infoTitre>no info</span><small> par <span class="infoAuteur">no info</span></small>
+			</h3>
 		</div>
+		
+		<form method="GET" action="." class="form-horizontal">
+			<fieldset>
+				<legend>Modifier le média</legend>
+				<div class="form-group">
+					<label for="titre" class="control-label col-sm-2 hidden-xs">Titre</label>
+					<div class="col-sm-7 col-xs-12"> 
+						<input type="text" class="form-control" placeholder="Titre" name="titre" required="required">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="auteur" class="control-label col-sm-2 hidden-xs">Auteur</label>
+					<div class="col-sm-7 col-xs-12">
+						<input type="text" class="form-control" placeholder="Auteur" name="auteur" required="required">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="type" class="control-label col-sm-2 hidden-xs">Type</label>
+					<div class="col-sm-7 col-xs-12">
+						<select name="selectType" class="form-control">
+							<option>Livre</option>
+							<option>CD</option>
+							<option>DVD</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12 col-sm-offset-2">
+						<input class="btn btn-default" type="submit" value="Enregistrer">
+					</div>
+				</div>
+			</fieldset>
+		</form>
+		
 		<div class="alert alert-success" role="alert">Disponible</div>
 		</br>
-		<div class="alert alert-warning" role="alert">Emprunté par Moïse, sera disponible le 25/05/2016</div>
-
+		<div class="alert alert-warning" role="alert">Emprunté par Moïse, sera disponible le <span class="dateDispo">25/05/2016</span></div>
+		
 		<form class="form-inline">
 			<fieldset>
 				<legend>Ajouter un prêt</legend>
@@ -78,7 +201,7 @@
 				</div>
 				<div class="form-group">
 					<label for="dateEmprunt" class="hidden-xs">Date emprunt</label>
-					<input type="date" class="form-control" name="dateEmprunt" required="required">
+					<input type="date" class="form-control dateEmprunt" name="dateEmprunt" required="required">
 				</div>
 				<button type="submit" class="btn btn-default">Ajouter</button>
 			</fieldset>
@@ -92,43 +215,59 @@
 					<table class="hidden-xs table table-hover table-bordered ">
 						<thead>
 							<tr class="entete" >
-								<th><a href="">Nom <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
-								<th><a href="">Prénom <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
-								<th ><a href="">Date<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
+								<th onclick="location.href='#';" style="cursor:pointer;">
+									<span>Nom </span>
+									<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								</th>
+								<th onclick="location.href='#';" style="cursor:pointer;">
+									<span>Prénom </span>
+									<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								</th>
+								<th onclick="location.href='#';" style="cursor:pointer;">
+									<span>Date </span>
+									<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr >
-								<td data-title="Nom"><a href="">dddddd</a></td>
-								<td data-title="Prénom"><a href="">dddddddd</a></td>
-								<td data-title="Date"><a href="">dddddd</a></td>
+							<tr onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
+								<td data-title="Nom"><span>Arthur</span></td>
+								<td data-title="Prénom"><span>Quentin</span></td>
+								<td data-title="Date"><span>19/06/2015</span></td>
 							</tr>
-							<tr>
-								<td data-title="Nom"><a href="">dddddd</a></td>
-								<td data-title="Prénom"><a href="">dddddddd</a></td>
-								<td data-title="Date"><a href="">dddddd</a></td>		
+							<tr onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
+								<td data-title="Nom"><span>Fort</span></td>
+								<td data-title="Prénom"><span>Mathieu</span></td>
+								<td data-title="Date"><span>25/05/2013</span></td>		
 							</tr>
-							<tr>
-								<td data-title="Nom"><a href="">dddddd</a></td>
-								<td data-title="Prénom"><a href="">dddddddd</a></td>
-								<td data-title="Date"><a href="">dddddd</a></td>
+							<tr onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
+								<td data-title="Nom"><span>Link</span></td>
+								<td data-title="Prénom"><span>Zelda</span></td>
+								<td data-title="Date"><span>04/02/2014</span></td>
 							</tr>
 						</tbody>
 					</table>
 					
 					<div class=" visible-xs-block row" >
 						<div class="col-xs-6">
-							<div class="list">
-								<label>Nom : </label><a href="">dddddd</a><br>
-								<label>Prénom : </label><a href="">dddddddd</a><br>
-								<label>Date : </label> <a href="">dddddd</a><br>
+							<div class="list" onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
+								<label>Nom :</label><span>Arthur</span><br>
+								<label>Prénom :</label><span>Quentin</span><br>
+								<label>Date :</label><span>19/06/2015</span><br>
 							</div>
 						</div>
 						<div class="col-xs-6">
-							<div class="list">
-								<label>Nom : </label><a  href="">dddddd</a><br>
-								<label>Prénom : </label><a  href="">dddddddd</a><br>
-								<label>Date : </label> <a  href="">dddddd</a><br>
+							<div class="list" onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
+								<label>Nom :</label><span>Fort</span><br>
+								<label>Prénom :</label><span>Mathieu</span><br>
+								<label>Date :</label><span>25/05/2013</span><br>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="list" onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
+								<label>Nom :</label><span>Link</span><br>
+								<label>Prénom :</label><span>Zelda</span><br>
+								<label>Date :</label><span>04/02/2014</span><br>
 							</div>
 						</div>
 					</div>
