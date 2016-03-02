@@ -17,6 +17,48 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="bootstrap/js/jquery-1.12.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+	function formaterDate(date){
+		// format string au format date
+		var day = ("0" + date.getDate()).slice(-2);
+		var month = ("0" + (date.getMonth()+1)).slice(-2);
+		return (date.getFullYear() + '-' + month + '-' + day);
+	}
+
+	function datePaiementToday(){
+		// on met, par défaut, la date de paiement de paiement de la cotisation à aujourd'hui
+		var today = formaterDate(new Date());
+		$('#datePaiement').val(today);
+	}
+
+	function calculDateFinAbonnement(){
+		// date fin abonnement = date de paiement de cotisation + 1an
+		var dateFin = new Date($('#datePaiement').val());
+		dateFin.setYear(dateFin.getFullYear() + 1);
+		$('#finAbonnement').val(formaterDate(dateFin));
+	}
+
+	function getAge(date) {
+		return Math.floor(((new Date()) - new Date(date)) / (1000 * 60 * 60 * 24 *365.25));
+	}
+
+	$(function() {
+		datePaiementToday();
+		calculDateFinAbonnement();
+
+		// calcul de l'age automatique
+		$('#dateNaissance').change(function() {
+			var age = getAge($('#dateNaissance').val());
+			if (parseInt(age) > 0) {
+				$('#age').val(age);
+			} else {
+				$('#age').val('?');
+			}
+		});
+	});
+</script>
 </head>
 <body class="container">
 	<header class="row jumbotron">
@@ -66,62 +108,68 @@
 			<fieldset>
 				<legend>Créer un adhérent</legend>
 				<div class="form-group">
-					<label for="nom" class="control-label col-sm-3 hidden-xs">Nom</label>
-					<div class="col-sm-3 col-xs-6"> 
+					<label for="nom" class="control-label col-sm-2 hidden-xs">Nom</label>
+					<div class="col-sm-4 col-xs-6"> 
 						<input type="text" class="form-control" placeholder="Nom" name="nom" required="required">
 					</div>
-					<label for="prenom" class="control-label col-sm-3 hidden-xs">Prénom</label>
-					<div class="col-sm-3 col-xs-6">
+					<label for="prenom" class="control-label col-sm-2 hidden-xs">Prénom</label>
+					<div class="col-sm-4 col-xs-6">
 						<input type="text" class="form-control" placeholder="Prénom" name="prenom" required="required">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="dateNaissance" class="control-label col-sm-3 hidden-xs">Date de naissance</label>
-					<div class="col-sm-3 col-xs-6"> 
-						<input type="date" class="form-control" name="dateNaissance" placeholder="Date de naissance" required="required">
+					<label for="dateNaissance" class="control-label col-sm-2 hidden-xs">Date de naissance</label>
+					<div class="col-sm-4 col-xs-6"> 
+						<input type="date" class="form-control" id="dateNaissance" name="dateNaissance" placeholder="Date de naissance" required="required">
 					</div>
-					<label for="age" class="control-label col-sm-3 hidden-xs">Âge</label>
-					<div class="col-sm-3 col-xs-6">
-						<input type="text" class="form-control" placeholder="Âge" name="age"readonly>
+					<label for="age" class="control-label col-sm-2 hidden-xs">Âge</label>
+					<div class="col-sm-4 col-xs-6">
+						<input type="text" class="form-control" id='age' placeholder="Âge" name="age"readonly>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="mail" class="control-label col-sm-3 hidden-xs">E-mail</label>
-					<div class="col-sm-9 col-xs-12"> 
+					<label for="mail" class="control-label col-sm-2 hidden-xs">E-mail</label>
+					<div class="col-sm-10 col-xs-12"> 
 						<input type="email" class="form-control" placeholder="E-mail" name="mail" required="required">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="adresse" class="control-label col-sm-3 hidden-xs">Adresse</label>
-					<div class="col-sm-9 col-xs-12"> 
+					<label for="adresse" class="control-label col-sm-2 hidden-xs">Adresse</label>
+					<div class="col-sm-10 col-xs-12"> 
 						<input type="text" class="form-control" placeholder="Adresse" name="adresse">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="codePostal" class="control-label col-sm-3 hidden-xs">Code Postal</label>
-					<div class="col-sm-3 col-xs-6"> 
+					<label for="adresse" class="control-label col-sm-2 hidden-xs">Adresse (suite)</label>
+					<div class="col-sm-10 col-xs-12"> 
+						<input type="text" class="form-control" placeholder="Adresse" name="adresse">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="codePostal" class="control-label col-sm-2 hidden-xs">Code Postal</label>
+					<div class="col-sm-4 col-xs-6"> 
 						<input type="text" class="form-control" placeholder="Code Postal" name="nom" maxLength="5">
 					</div>
-					<label for="ville" class="control-label col-sm-3 hidden-xs">Ville</label>
-					<div class="col-sm-3 col-xs-6">
+					<label for="ville" class="control-label col-sm-2 hidden-xs">Ville</label>
+					<div class="col-sm-4 col-xs-6">
 						<input type="text" class="form-control" placeholder="Ville" name="ville">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="datePaiement" class="control-label col-sm-3 hidden-xs">Date de paiement de la cotisation</label>
-					<div class="col-sm-3 col-xs-6"> 
-						<input type="date" class="form-control" name="datePaiement" maxLength="5" placeholder="Date de paiement de la cotisation">
+					<label for="datePaiement" class="control-label col-sm-2 hidden-xs">Date de paiement de la cotisation</label>
+					<div class="col-sm-4 col-xs-6"> 
+						<input type="date" id="datePaiement" class="form-control" name="datePaiement" placeholder="Date de paiement de la cotisation">
 					</div>
-					<label for="dateFinAbonnement" class="control-label col-sm-3 hidden-xs">Date de fin d’abonnement</label>
-					<div class="col-sm-3 col-xs-6">
-						<input type="date" class="form-control" name="dateFinAbonnement" placeholder="Date de fin d’abonnement" readonly>
+					<label for="dateFinAbonnement" class="control-label col-sm-2 hidden-xs">Date de fin d’abonnement</label>
+					<div class="col-sm-4 col-xs-6">
+						<input type="date" class="form-control" id='finAbonnement' name="dateFinAbonnement" placeholder="Date de fin d’abonnement" readonly>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="montantCotisation" class="control-label col-sm-3 hidden-xs">Montant de la cotisation</label>
-					<div class="col-sm-9 col-xs-12"> 
+					<label for="montantCotisation" class="control-label col-sm-2 hidden-xs">Montant de la cotisation</label>
+					<div class="col-sm-4 col-xs-12"> 
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Montant de la cotisation" name="montantCotisation" maxLength="8">
+							<input type="text" class="form-control" placeholder="Montant de la cotisation" name="montantCotisation" maxLength="6">
 							<span class="input-group-addon">€</span>
 						</div>
 
