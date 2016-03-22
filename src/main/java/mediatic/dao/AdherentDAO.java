@@ -46,6 +46,7 @@ public class AdherentDAO extends GenericDAO<Adherent>{
 			case 0: trie="identifiant"; break;
 			case 2: trie="prenom";break;
 			case 3: trie="dateNaissance";break;
+			case 4: trie="aJourCotisation"; break;
 			default: trie="nom";
 		}
 		if((typeTrie%2)==1){
