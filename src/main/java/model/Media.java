@@ -21,7 +21,7 @@ public class Media {
 	private String titre;
 	private String auteur;
 	@Enumerated(EnumType.STRING)
-	private TypeMedia type;
+	private TypeMedia typeMedia;
 	
 	@OneToMany(mappedBy="media")
 	private List<Emprunt> emprunt;
@@ -44,16 +44,16 @@ public class Media {
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
 	}
-	public TypeMedia getType() {
-		return type;
+	public TypeMedia getTypeMedia() {
+		return typeMedia;
 	}
-	public void setType(TypeMedia type) {
-		this.type = type;
+	public void setTypeMedia(TypeMedia type) {
+		this.typeMedia = type;
 	}
 	
 	@Override
 	public String toString() {
-		return "Media [id=" + id + ", titre=" + titre + ", auteur=" + auteur + ", type=" + type + "]";
+		return "Media [id=" + id + ", titre=" + titre + ", auteur=" + auteur + ", type=" + typeMedia + "]";
 	}
 	
 	
