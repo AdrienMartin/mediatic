@@ -6,9 +6,12 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table(name = "adherent_")
@@ -16,11 +19,13 @@ public class Adherent {
 	public static enum Droit{USER, ADMIN};
 	
 	@Id
+	@GeneratedValue
 	private String identifiant;
 	private String motDePasse;
 	private String nom;
 	private String prenom;
 	private Date dateNaissance;
+	@Email
 	private String email;
 	private String adresse;
 	private int codePostal;
