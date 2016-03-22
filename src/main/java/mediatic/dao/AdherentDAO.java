@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import model.Adherent;
+import model.Media;
 
 public class AdherentDAO extends GenericDAO<Adherent>{
 	
@@ -66,6 +67,6 @@ public class AdherentDAO extends GenericDAO<Adherent>{
 		
 	}
 	
-	
+
 	
 }

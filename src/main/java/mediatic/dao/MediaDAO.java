@@ -4,8 +4,6 @@ import java.util.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
-import model.Adherent;
 import model.Media;
 
 
@@ -57,5 +55,7 @@ public class MediaDAO extends GenericDAO<Media>{
 	    
 		return medias;
 	}
+	
+
 
 }
