@@ -11,6 +11,7 @@ import javax.persistence.Table;
 public class Emprunt {
 
 	private Date dateEmprunt;
+	private Date dateRetour;
 	
 	@ManyToOne
 	private Adherent emprunteur;
@@ -32,6 +33,14 @@ public class Emprunt {
 
 	public void setEmprunteur(Adherent emprunteur) {
 		this.emprunteur = emprunteur;
+	}
+	
+	public Date getDateRetour() {
+		return dateRetour;
+	}
+
+	public void setDateRetour(Date dateRetour) {
+		this.dateRetour = dateRetour;
 	}
 
 	public Media getMedia() {

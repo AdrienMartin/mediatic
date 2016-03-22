@@ -35,6 +35,7 @@ public class AdherentDAO extends GenericDAO<Adherent>{
 	      
 		return adherent;
 	}
+	// TODO: etendre la recherche 
 	public List<Adherent> recherche(String identifiant,String nom, int typeTrie){
 		
 		List<Adherent>adherents=new ArrayList<Adherent>();

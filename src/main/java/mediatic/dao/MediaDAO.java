@@ -23,6 +23,7 @@ public class MediaDAO extends GenericDAO<Media>{
 		}
 		return dao;
 	}
+	// TODO: etendre la recherche 
 	public List<Media>recherche(String titre, String auteur, String typeMedia, int typeTrie){
 		
 		List<Media>medias=new ArrayList<Media>();
