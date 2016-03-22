@@ -32,6 +32,7 @@ public class Adherent {
 	private String ville;
 	private Date datePaiementCotisation;
 	private int montantCotisation;
+	private Boolean aJourCotisation;
 	@Enumerated(EnumType.STRING)
 	private Droit droit;
 	
@@ -103,6 +104,13 @@ public class Adherent {
 	}
 	public void setMontantCotisation(int montantCotisation) {
 		this.montantCotisation = montantCotisation;
+	}
+	
+	public Boolean getaJourCotisation() {
+		return aJourCotisation;
+	}
+	public void setaJourCotisation(Boolean aJourCotisation) {
+		this.aJourCotisation = aJourCotisation;
 	}
 	public Droit getDroit() {
 		return droit;
