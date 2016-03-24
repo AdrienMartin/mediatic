@@ -39,7 +39,7 @@ public class AdherentDAO extends GenericDAO<Adherent>{
 	      
 		return adherent;
 	}
-	// TODO: etendre la recherche 
+
 	public List<Object[]> recherche(String identifiant,String nom, int typeTrie){		
 		String desc="";
 		String trie="";
@@ -77,12 +77,13 @@ public class AdherentDAO extends GenericDAO<Adherent>{
 	    q.setParameter("nom", "%"+nom+"%");
 	    
 	    List<Object[]> adherentsTemp = q.getResultList();
-	    System.out.println(adherentsTemp.get(0)[0]);
-	    System.out.println(adherentsTemp.get(0)[1]);
-	    System.out.println(adherentsTemp.get(1)[0]);
-	    System.out.println(adherentsTemp.get(1)[1]);
-	    System.out.println(adherentsTemp.get(2)[0]);
-	    System.out.println(adherentsTemp.get(2)[1]);
+	    for(int i = 0; i < adherentsTemp.size(); i++)
+	    {
+	    	for(int j = 0; j < adherentsTemp.get(i).length; j++)
+	    	{
+	    	    System.out.println(adherentsTemp.get(i)[j]);
+	    	}
+	    }
 	    
 	    return adherentsTemp;
 		
