@@ -59,11 +59,12 @@ public class AdherentDAO extends GenericDAO<Adherent>{
 		}
 		
 		EntityManager em = DatabaseHelper.createEntityManager();
-		Query q = em.createQuery("Select a, ("
-				+ "Select count(b) "
-				+ "from b "
-				+ "where (b.dateRetour is null or b.dateRetour > now()) "
-				+ "and b.emprunteur = a"
+		Query q = em.createQuery("Select a, "
+				+ "("
+					+ "Select count(b) "
+					+ "from b "
+					+ "where (b.dateRetour is null or b.dateRetour > now()) "
+					+ "and b.emprunteur = a"
 				+ ") "
 				+ "From Adherent a "
 				+ "left join a.emprunts b "
