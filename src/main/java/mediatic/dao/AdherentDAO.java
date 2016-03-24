@@ -27,10 +27,15 @@ public class AdherentDAO extends GenericDAO<Adherent>{
 		Adherent adherent=null;
 		
 		EntityManager em = DatabaseHelper.createEntityManager();
-		TypedQuery<Adherent> q = em.createQuery("Select a From adherent_ a where a.identifiant=:id and a.motDePasse=:mdp",Adherent.class);
+		TypedQuery<Adherent> q = em.createQuery("Select a From Adherent a where a.identifiant=:id and a.motDePasse=:mdp",Adherent.class);
 	    q.setParameter("id", identifiant);
 	    q.setParameter("mdp", mdp);
-	    adherent=q.getSingleResult();
+	    try{
+	    	  adherent=q.getSingleResult();
+	    }
+	    catch(NoResultException e){
+	    	adherent=null;
+	    }
 	      
 		return adherent;
 	}
@@ -56,11 +61,10 @@ public class AdherentDAO extends GenericDAO<Adherent>{
 		}
 		
 		EntityManager em = DatabaseHelper.createEntityManager();
-		TypedQuery<Adherent> q = em.createQuery("Select a, count(b) From Adherent a left join fetch a.emprunts b where a.identifiant=:id% and a.nom=%:nom% or a.prenom=%:nom%  order by :trie :desc group by ",Adherent.class);
-	    q.setParameter("id", identifiant);
-	    q.setParameter("nom", nom);
-	    q.setParameter("desc", desc);
-	    q.setParameter("trie", trie);
+		TypedQuery<Adherent> q = em.createQuery("Select a From Adherent a left join fetch a.emprunts b where a.identifiant LIKE :identifiant and (a.nom LIKE :nom or a.prenom LIKE :nom) order by " + trie + " " +desc,Adherent.class);
+	    
+		q.setParameter("identifiant", identifiant+"%");
+	    q.setParameter("nom", "%"+nom+"%");
 	    
 	    adherents=q.getResultList();
 	    

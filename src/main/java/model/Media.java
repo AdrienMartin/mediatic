@@ -6,9 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -18,13 +21,14 @@ public class Media {
 	public static enum TypeMedia{CD, DVD, LIVRE};
 	
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name="Media_SEQ", sequenceName="Media_SEQ", allocationSize=0)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Media_SEQ")
 	private Long id;
 	@NotEmpty
 	private String titre;
 	@NotEmpty
 	private String auteur;
-	@NotEmpty
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TypeMedia typeMedia;
 	

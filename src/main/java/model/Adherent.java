@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -20,14 +23,17 @@ public class Adherent {
 	public static enum Droit{USER, ADMIN};
 	
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name="Adherent_SEQ", sequenceName="Adherent_SEQ", allocationSize=0)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Adherent_SEQ")
+	private Long id;
+	@NotEmpty
 	private String identifiant;
 	private String motDePasse;
 	@NotEmpty
 	private String nom;
 	@NotEmpty
 	private String prenom;
-	@NotEmpty
+	@NotNull
 	private Date dateNaissance;
 	@Email
 	@NotEmpty
@@ -135,6 +141,12 @@ public class Adherent {
 		return "Adherent [identifiant=" + identifiant + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance="
 				+ dateNaissance + ", email=" + email + ", adresse=" + adresse + ", codePostal=" + codePostal
 				+ ", ville=" + ville + "]";
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	
