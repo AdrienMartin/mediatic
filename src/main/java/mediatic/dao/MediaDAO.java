@@ -3,6 +3,7 @@ package mediatic.dao;
 import java.util.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import model.Media;
 
@@ -23,10 +24,9 @@ public class MediaDAO extends GenericDAO<Media>{
 		}
 		return dao;
 	}
-	// TODO: etendre la recherche 
-	public List<Object[]>recherche(String titre, String auteur, String typeMedia, int typeTrie){
+
+	public List<Object[]>recherche(String titre, String auteur, Media.TypeMedia typeMedia, int typeTrie){
 		
-		List<Media>medias=new ArrayList<Media>();
 		
 		String desc="";
 		String trie="";
@@ -38,8 +38,8 @@ public class MediaDAO extends GenericDAO<Media>{
 			
 			case 1: trie="auteur";break;
 			case 2: trie="typeMedia";break;
-			case 3: trie="";//todo: emprunte par
-			case 4: trie="";//todo: date retour
+			case 3: trie="date";
+			case 4: trie="nomPrenom";
 			default: trie="titre";
 		}
 		if((typeTrie%2)==1){
@@ -47,20 +47,43 @@ public class MediaDAO extends GenericDAO<Media>{
 			desc="desc";
 			
 		}
-		TypedQuery<Media> q = em.createQuery("Select m"
-				+ "From Media m left join fetch m.emprunts e"
-				+ "where m.titre=:titre "
-				+ "and a.auteur=:auteur "
-				+ "and a.typeMedia=:typeMedia "
-				+ "order by " + trie + " " + desc,Media.class);
+		Query q = em.createQuery("Select m, "
+				+ "("
+					+ "Select e.dateRetour as date "
+					+ "from e "
+					+ "where (e.dateRetour is null or e.dateRetour > now()) "
+					+ "and e.media = m"
+				+ "), "
+				+ "("
+					+ "Select concat(a.nom, ' ', a.prenom) as nomPrenom "
+					+ "from a "
+					+ "where e.emprunteur = a"
+				+ ") "
+				+ "From Media m "
+				+ "left join m.emprunts e "
+				+ "left join e.emprunteur a "
+				+ "where m.titre Like :titre "
+				+ "and m.auteur Like :auteur "
+				+ "and m.typeMedia Like :typeMedia "
+				+ "order by " + trie + " " + desc);
 		
 	    q.setParameter("titre", "%" + titre + "%");
 	    q.setParameter("auteur", "%" + auteur+ "%");
 	    q.setParameter("typeMedia",typeMedia);
 	    
-	    medias=q.getResultList();
+	    List<Object[]> mediasTemp = q.getResultList();
+
+	    System.out.println(mediasTemp.size());
 	    
-		return medias;
+	    for(int i = 0; i < mediasTemp.size(); i++)
+	    {
+	    	for(int j = 0; j < mediasTemp.get(i).length; j++)
+	    	{
+	    	    System.out.println(mediasTemp.get(i)[j]);
+	    	}
+	    }
+	    
+		return mediasTemp;
 	}
 	
 

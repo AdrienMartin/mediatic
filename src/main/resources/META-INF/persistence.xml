@@ -6,7 +6,7 @@
 
  <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
  <properties>
- <property name="hibernate.hbm2ddl.auto" value="update" />
+ <property name="hibernate.hbm2ddl.auto" value="create" />
  <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
  <property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
  <property name="hibernate.show_sql" value="true"/>
