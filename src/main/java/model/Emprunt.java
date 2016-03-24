@@ -3,6 +3,8 @@ package model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -11,6 +13,10 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "emprunt_")
 public class Emprunt {
 
+	@Id
+	@GeneratedValue
+	private Long id;
+	
 	private Date dateEmprunt;
 	private Date dateRetour;
 	
@@ -51,6 +57,15 @@ public class Emprunt {
 	public void setMedia(Media media) {
 		this.media = media;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	
 	
 }

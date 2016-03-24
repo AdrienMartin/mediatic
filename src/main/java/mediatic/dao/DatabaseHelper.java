@@ -6,16 +6,9 @@ import javax.persistence.Persistence;
 
 public class DatabaseHelper {
 
-	private static EntityManagerFactory entityManagerFactory;
+	private static EntityManagerFactory entityManagerFactory= Persistence.createEntityManagerFactory("unit");
 
 	public static EntityManager createEntityManager() {
-
-		if (entityManagerFactory == null) {
-	
-			entityManagerFactory = Persistence.createEntityManagerFactory("unit");
-	
-		}
-
 		return entityManagerFactory.createEntityManager();
 
 	}
