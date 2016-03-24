@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "media_")
 public class Media {
@@ -18,8 +20,11 @@ public class Media {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@NotEmpty
 	private String titre;
+	@NotEmpty
 	private String auteur;
+	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	private TypeMedia typeMedia;
 	

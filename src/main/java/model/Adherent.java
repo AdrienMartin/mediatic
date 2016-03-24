@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "adherent_")
@@ -22,10 +23,14 @@ public class Adherent {
 	@GeneratedValue
 	private String identifiant;
 	private String motDePasse;
+	@NotEmpty
 	private String nom;
+	@NotEmpty
 	private String prenom;
+	@NotEmpty
 	private Date dateNaissance;
 	@Email
+	@NotEmpty
 	private String email;
 	private String adresse;
 	private int codePostal;
