@@ -2,9 +2,8 @@ package mediatic.dao;
 
 import java.util.*;
 import javax.persistence.*;
-
 import model.Adherent;
-import model.Media;
+
 
 public class AdherentDAO extends GenericDAO<Adherent>{
 	
@@ -57,7 +56,7 @@ public class AdherentDAO extends GenericDAO<Adherent>{
 		}
 		
 		EntityManager em = DatabaseHelper.createEntityManager();
-		TypedQuery<Adherent> q = em.createQuery("Select a From adherent_ a where a.identifiant=:id% and a.nom=%:nom% or a.prenom=%:nom%  order by :trie :desc",Adherent.class);
+		TypedQuery<Adherent> q = em.createQuery("Select a, count(b) From Adherent a left join fetch a.emprunts b where a.identifiant=:id% and a.nom=%:nom% or a.prenom=%:nom%  order by :trie :desc group by ",Adherent.class);
 	    q.setParameter("id", identifiant);
 	    q.setParameter("nom", nom);
 	    q.setParameter("desc", desc);

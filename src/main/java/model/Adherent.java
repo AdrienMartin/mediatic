@@ -42,7 +42,7 @@ public class Adherent {
 	private Droit droit;
 	
 	@OneToMany(mappedBy="emprunteur")
-	private List<Emprunt> emprunt; 
+	private List<Emprunt> emprunts; 
 	
 	public String getIdentifiant() {
 		return identifiant;
@@ -124,10 +124,10 @@ public class Adherent {
 		this.droit = droit;
 	}
 	public List<Emprunt> getEmprunt() {
-		return emprunt;
+		return emprunts;
 	}
 	public void setEmprunt(List<Emprunt> emprunt) {
-		this.emprunt = emprunt;
+		this.emprunts = emprunt;
 	}
 	
 	@Override

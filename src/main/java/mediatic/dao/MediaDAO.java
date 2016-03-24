@@ -45,7 +45,7 @@ public class MediaDAO extends GenericDAO<Media>{
 			desc="desc";
 			
 		}
-		TypedQuery<Media> q = em.createQuery("Select m From media_ m where m.titre=:%titre% and a.auteur=%:auteur% or a.typeMedia=:typeMedia order by :trie :desc ",Media.class);
+		TypedQuery<Media> q = em.createQuery("Select m From Media  m where m.titre=:%titre% and a.auteur=%:auteur% or a.typeMedia=:typeMedia order by :trie :desc ",Media.class);
 	    q.setParameter("titre", titre);
 	    q.setParameter("auteur", auteur);
 	    q.setParameter("typeMedia", typeMedia);
