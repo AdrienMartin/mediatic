@@ -58,6 +58,7 @@ public class Main {
 		
 		Emprunt emp=new Emprunt();
 		emp.setDateEmprunt(new Date());
+		//emp.setDateRetour(new Date());
 		emp.setEmprunteur(ad);
 		emp.setMedia(med);
 		daoEm.persist(emp);
@@ -67,7 +68,7 @@ public class Main {
 		System.out.println("----------------------------------------------------------");
 		System.out.println(daoAd.identification("identt", "mdp"));
 		System.out.println("----------------------------------------------------------");
-		System.out.println(daoAd.recherche("", "", 1));
+		System.out.println(daoAd.recherche("", "", 10));
 	}
 
 }

@@ -50,6 +50,14 @@ public class Adherent {
 	@OneToMany(mappedBy="emprunteur")
 	private List<Emprunt> emprunts; 
 	
+	/*public int getNbEmpruntEncours() {
+		return nbEmpruntEncours;
+	}
+	public void setNbEmpruntEncours(int nbEmpruntEncours) {
+		this.nbEmpruntEncours = nbEmpruntEncours;
+	}
+	private int nbEmpruntEncours;*/
+	
 	public String getIdentifiant() {
 		return identifiant;
 	}
