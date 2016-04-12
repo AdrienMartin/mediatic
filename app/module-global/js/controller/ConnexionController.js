@@ -12,7 +12,7 @@ module.controller('ConnexionController', ['$http','$scope','$location','Connexio
 		
 		 if(con==undefined){
 			 
-			 //$scope.res="veuillez ressaisir vos identifiants";
+			 $scope.res="veuillez ressaisir vos identifiants";
 		 }
 		 else{
 			 
