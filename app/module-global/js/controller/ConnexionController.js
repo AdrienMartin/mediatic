@@ -8,18 +8,14 @@ module.controller('ConnexionController', ['$http','$scope','$location','Connexio
 		 var login=$scope.login;
 		 var mdp=$scope.mdp;
 		
-		 var con=ConnexionService.connexion(login,mdp);
-		
-		 if(con==undefined){
-			 
-			 $scope.res="veuillez ressaisir vos identifiants";
-		 }
-		 else{
-			 
-			 $location.path('/adherent');
-		 }
+		 ConnexionService.connexion(login,mdp).then(function(response){
+			 if(response==undefined){
+				 $scope.res="Vos identifiants sont incorrect, veuillez ressaisir vos identifiants";
+			 } else {
+				 $scope.res = undefined;
+			 }
+		});
 	}
-	
 }]);
 	
 

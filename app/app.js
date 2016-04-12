@@ -10,11 +10,11 @@ angular.module('ModuleApp', ['ngRoute', 'ModuleAdherent', 'ModuleMedia']);
 // => Injection du Provider du service $route afin de le configurer.
 angular.module('ModuleApp').config(function($routeProvider){
 	
-		$routeProvider.when('/login',{
-			templateUrl:'module-global/templates/login.html',
-			controller:'ConnexionController',
-			controllerAs:'conCtrl'
-		});
+//		$routeProvider.when('/login',{
+//			templateUrl:'module-global/templates/login.html',
+//			controller:'ConnexionController',
+//			controllerAs:'conCtrl'
+//		});
 		$routeProvider.otherwise({
 			redirectTo : '/login'
 		})

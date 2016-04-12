@@ -23,6 +23,7 @@
 
 <!--Chargement des CONTROLLERS -->
 <script src="module-global/js/controller/ConnexionController.js"></script>
+<script src="module-global/js/controller/TopController.js"></script>
 <script src="module-adherent/js/adherent.js"></script>
 <script src="module-adherent/js/service/adherents.js"></script>
 <script src="module-adherent/js/controller/RechercheAdherentController.js"></script>
@@ -33,7 +34,13 @@
 
 
 </head>
-<body class="container">
-	<ng-view></ng-view>
+<body class="container" ng-controller="TopController as topCtrl">
+	<div ng-if="topCtrl.isConnected()">
+		<ng-view></ng-view>
+	</div>
+	<div ng-if="!topCtrl.isConnected()">
+		<div ng-include="'./module-global/templates/login.html'"></div>
+	</div>
+	
 </body>
 </html>
