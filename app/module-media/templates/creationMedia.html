@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Création Média</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/rechercheMedia.css">
+<link rel="stylesheet" media="screen and (max-width:800px)" type="text/css" href="css/rechercheMedia_tel.css" >
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="bootstrap/js/jquery-1.12.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body class="container">
+	<header class="row jumbotron">
+		<div class="col-md-10 col-md-offset-1 col-xs-12">
+			<h1>Mediatic<small class="hidden-xs"> Création d'un média</small></h1>
+		</div>
+		<div class="visible-xs-block col-xs-12">
+			<h1><small>Création d'un média</small></h1>
+		</div>
+	</header>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Menu Tablette, PC -->
+			<ul class="hidden-xs nav navbar-nav">
+				<li><span class="navbar-brand">Média :</span></li>
+				<li><a href="rechercheMedia.html"><span class="glyphicon glyphicon-search"></span><span class="hidden-sm"> Recherche</span></a></li>
+				<li><a href="creationMedia.html"><span class="glyphicon glyphicon-plus"></span><span class="hidden-sm"> Création</span></a></li>
+				
+	        	<li><span class="navbar-brand glyphicon glyphicon-option-vertical"></span></li>
+	        	
+				<li><span class="navbar-brand">Adhérent :</span></li>
+				<li><a href="rechercheAdherent.html"><span class="glyphicon glyphicon-search"></span><span class="hidden-sm"> Recherche</span></a></li>
+				<li><a href="creationAdherent.html"><span class="glyphicon glyphicon-plus"></span><span class="hidden-sm"> Création</span></a></li>
+			</ul>
+				
+			<!-- Menu Téléphone -->
+			<ul class="nav navbar-nav visible-xs-block">
+				<li class="col-xs-6 dropdown">
+					<a href="#" class="col-xs-12 dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Média <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="rechercheMedia.html"><span class="glyphicon glyphicon-search"></span><span> Recherche</span></a></li>
+						<li><a href="creationMedia.html"><span class="glyphicon glyphicon-plus"></span><span> Création</span></a></li>
+					</ul>
+	        	</li>
+				<li class="col-xs-6 dropdown">
+					<a href="#" class="col-xs-12 dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Adhérent <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="rechercheAdherent.html"><span class="glyphicon glyphicon-search"></span><span> Recherche</span></a></li>
+						<li><a href="creationAdherent.html"><span class="glyphicon glyphicon-plus"></span><span> Création</span></a></li>
+					</ul>
+	        	</li>
+			</ul>
+		</div>
+	</nav>
+	<main>
+		<form method="GET" action="." class="form-horizontal">
+			<fieldset>
+				<legend>Créer un média</legend>
+				<div class="form-group">
+					<label for="titre" class="control-label col-sm-2 hidden-xs">Titre</label>
+					<div class="col-sm-7 col-xs-12"> 
+						<input type="text" class="form-control" placeholder="Titre" name="titre" required="required">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="auteur" class="control-label col-sm-2 hidden-xs">Auteur</label>
+					<div class="col-sm-7 col-xs-12">
+						<input type="text" class="form-control" placeholder="Auteur" name="auteur" required="required">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="type" class="control-label col-sm-2 hidden-xs">Type</label>
+					<div class="col-sm-7 col-xs-12">
+						<select name="selectType" class="form-control">
+							<option>Livre</option>
+							<option>CD</option>
+							<option>DVD</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12 col-sm-offset-2">
+						<input class="btn btn-default" type="submit" value="Enregistrer">
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</main>
+</body>
+</html>
