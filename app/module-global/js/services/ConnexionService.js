@@ -13,9 +13,11 @@ myApp.service('ConnexionService',['$http', function($http) {
 			}, function myError(response) {
 				
 		        //res=response.statusText;
+		        
+		        console.log(response.statusText)
 				
 		    });
-			console.log("response",res);
+			
 		 return res;
 	}
 	
