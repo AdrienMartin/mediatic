@@ -4,7 +4,7 @@
 //  - ModuleMedia : pour gérer le catalogue de l'application
 //  - ModuleAdherent : pour gérer les livres de l'application
 //  - ModuleGlobal : pour avoir les filtres
-angular.module('ModuleApp', ['ngRoute']);
+angular.module('ModuleApp', ['ngRoute', 'ModuleAdherent']);
 
 // Configuration du module ModuleApp
 // => Injection du Provider du service $route afin de le configurer.
