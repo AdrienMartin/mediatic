@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+	<title>Mediatic</title>	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="./../../bower_components/bootstrap/dist/css/bootstrap.min.css" >
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="./../../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" >
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="./../../bower_components/jquery/dist/jquery.min.js" ></script>
+	<script src="./../../bower_components/bootstrap/dist/js/bootstrap.min.js" ></script>
+	<link rel="stylesheet" type="text/css" href="./../../css/rechercheMedia.css">
+	<link rel="stylesheet" media="screen and (max-width:800px)" type="text/css" href="./../../css/rechercheMedia_tel.css" >
+</head>
+<body class="container">
+	<header class="row jumbotron">
+		<div class="col-md-10 col-md-offset-1 col-xs-12">
+			<h1>Mediatic<small class="hidden-xs"> Recherche de médias</small></h1>
+		</div>
+		<div class="visible-xs-block col-xs-12">
+			<h1><small>Recherche de médias</small></h1>
+		</div>
+	</header>
+	
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Menu Tablette, PC -->
+			<ul class="hidden-xs nav navbar-nav">
+				<li><span class="navbar-brand">Média :</span></li>
+				<li><a href="rechercheMedia.html"><span class="glyphicon glyphicon-search"></span><span class="hidden-sm"> Recherche</span></a></li>
+				<li><a href="creationMedia.html"><span class="glyphicon glyphicon-plus"></span><span class="hidden-sm"> Création</span></a></li>
+				
+	        	<li><span class="navbar-brand glyphicon glyphicon-option-vertical"></span></li>
+	        	
+				<li><span class="navbar-brand">Adhérent :</span></li>
+				<li><a href="rechercheAdherent.html"><span class="glyphicon glyphicon-search"></span><span class="hidden-sm"> Recherche</span></a></li>
+				<li><a href="creationAdherent.html"><span class="glyphicon glyphicon-plus"></span><span class="hidden-sm"> Création</span></a></li>
+			</ul>
+				
+			<!-- Menu Téléphone -->
+			<ul class="nav navbar-nav visible-xs-block">
+				<li class="col-xs-6 dropdown">
+					<a href="#" class="col-xs-12 dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Média <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="rechercheMedia.html"><span class="glyphicon glyphicon-search"></span><span> Recherche</span></a></li>
+						<li><a href="creationMedia.html"><span class="glyphicon glyphicon-plus"></span><span> Création</span></a></li>
+					</ul>
+	        	</li>
+				<li class="col-xs-6 dropdown">
+					<a href="#" class="col-xs-12 dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Adhérent <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="rechercheAdherent.html"><span class="glyphicon glyphicon-search"></span><span> Recherche</span></a></li>
+						<li><a href="creationAdherent.html"><span class="glyphicon glyphicon-plus"></span><span> Création</span></a></li>
+					</ul>
+	        	</li>
+			</ul>
+		</div>
+	</nav>
+	
+	<main>
+		<section class="bouton_new row">
+			<div class="col-md-12">
+				<a href="creationMedia.html"><button class="btn btn-primary">Nouveau <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></a>
+			</div>
+		</section>
+		
+		<section class="row">
+			<div class="col-md-4">
+				<div class="search">
+					<form>
+						<div class="form-group">
+							<label >Titre</label><br/>
+							<input ng-model="medCtrl.filters.titre" class="form-control" type="text" placeholder="Contient..."/>
+						</div>
+						<div class="form-group">
+							<label >Auteur</label><br/>
+							<input ng-model="medCtrl.filters.auteur" class="form-control" type="text" placeholder="Contient..."/>
+						</div>
+						<div class="form-group">
+							<label >Type</label><br/>
+							<select ng-model="medCtrl.filters.type" class="form-control">
+								<option>CD</option>
+								<option>DVD</option>
+								<option>Livre</option>
+							</select>
+						</div>
+					<button class="btn btn-default ">Rechercher</button>
+					</form>
+				</div>
+			</div>
+			
+			<div class="tableau col-md-8">
+				<span class="titre_tab">Liste des Médias</span>
+				<div class="responsive-table-line">
+					<table class="hidden-xs table table-hover table-bordered ">
+						<thead>
+							<tr class="entete" >
+								<th><a href="">Type <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+								<th><a href="">Titre <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+								<th><a href="">Auteur <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
+								<th ><a href="">Emprunté par <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+								<th ><a href="">Date de retour <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr onclick="location.href='ficheMedia.html';" style="cursor:pointer;">
+								<td data-title="Type"><span class="glyphicon glyphicon-book" aria-hidden="true"></span></td>
+								<td data-title="Titre">Mon histoire</td>
+								<td data-title="Auteur">Dan Carter</td>
+								<td data-title="Emprunté par">Matt Parker</td>
+								<td data-title="Date de retour">10/03/2016</td>
+							
+							</tr>
+							<tr onclick="location.href='ficheMedia.html';" style="cursor:pointer;">
+								
+								<td data-title="Type"><span class="glyphicon glyphicon-music" aria-hidden="true"></span></td>
+								<td data-title="Titre">Racine carrée</td>
+								<td data-title="Auteur">Stromae</td>
+								<td data-title="Emprunté par">Sarah Gerard</td>
+								<td data-title="Date de retour">20/03/2016</td>
+							
+							</tr>
+							<tr onclick="location.href='ficheMedia.html';" style="cursor:pointer;">
+								
+								<td data-title="Type"><span class="glyphicon glyphicon-film" aria-hidden="true"></span></td>
+								<td data-title="Titre">Les tuches 2</td>
+								<td data-title="Auteur">Olivier Baroux</td>
+								<td data-title="Emprunté par">Pierre Larboulette</td>
+								<td data-title="Date de retour">25/04/2016</td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<div class=" visible-xs-block row" >
+						<div class="col-xs-6">
+							<a href="ficheMedia.html"><div class="list">
+								<span class="glyphicon glyphicon-book" aria-hidden="true"> </span>
+								<label>Titre: </label><li> Mon histoire</li><br>					
+								<label>Auteur: </label> <li> Dan Carter<li><br>
+								<label>Emprunté par: </label><li> Matt Parker</li><br>
+								<label>Date de retour: </label><li> 10/03/2016</li><br>
+							
+							</div></a>
+							
+						</div>
+						<div class="col-xs-6">
+							<a href="ficheMedia.html"><div class="list">
+								<span class="glyphicon glyphicon-music" aria-hidden="true"></span>
+								<label>Titre: </label><li> Racine carrée</li><br>
+								<label>Auteur: </label> <li> Stromae<li><br>
+								<label>Emprunté par: </label><li> Sarah Gerard</li><br>
+								<label>Date de retour: </label><li> 20/03/2016</li><br>
+							
+							</div></a>
+						</div>
+						<div class="col-xs-6">
+							<a href="ficheMedia.html"><div class="list">
+								<span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+								<label>Titre: </label><li> Les tuches 2</li><br>
+								<label>Auteur: </label> <li> Olivier Baroux<li><br>
+								<label>Emprunté par: </label><li> Pierre Larboulette</li><br>
+								<label>Date de retour: </label><li> 25/04/2016</li><br>
+							
+						</div></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</body>
+</html>

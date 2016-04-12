@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fiche Média</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/ficheMedia.css">
+<link rel="stylesheet" type="text/css" href="css/rechercheMedia.css">
+<link rel="stylesheet" media="screen and (max-width:800px)" type="text/css" href="css/rechercheMedia_tel.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="bootstrap/js/jquery-1.12.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+	"use strict";
+	//variable de test
+	var dateDispo = new Date(2017, 4, 19);
+	var typeMedia = 'Livre';
+	var titreMedia = 'La Bible';
+	var auteurMedia = 'Jésus de Nazareth';
+	
+	$(function(){
+		initInfo();
+		afficheDateDispo();
+		initDateEmprunt();
+		calculDateRetour();
+
+		// calcul date retour automatique
+		$('input.dateEmprunt').change(function() {
+			var dateRetour = new Date($('input.dateEmprunt').val());
+			dateRetour.setDate(dateRetour.getDate() + 30);
+			$('.dateRetour').val(formaterDateInput(dateRetour));
+		});
+
+
+	});
+	
+	function initInfo()
+	{
+		var elementType = $('span.infoType');
+		var elementTitre = $('span.infoTitre');
+		var elementAuteur = $('span.infoAuteur');
+		if(elementType != undefined)
+		{
+			var x;
+			switch (typeMedia)
+			{
+				case "Livre":
+					x = " glyphicon glyphicon-book";
+					break;
+				case "CD":
+					x = " glyphicon glyphicon-music";
+					break;
+				case "DVD":
+					x = " glyphicon glyphicon-film";
+					break;
+			}
+			elementType.addClass(x);
+		}
+		if(elementTitre != undefined)
+		{
+			elementTitre.html(titreMedia);
+		}
+		if(elementAuteur != undefined)
+		{
+			elementAuteur.html(auteurMedia);
+		}
+	}
+	
+	function formaterDate(date)
+	{
+		// format string au format date
+		var day = ("0" + date.getDate()).slice(-2);
+		var month = ("0" + (date.getMonth()+1)).slice(-2);
+		return (day + '/' + month + '/' + date.getFullYear());
+	}
+
+	function formaterDateInput(date){
+		// format string au format date pour l'input Date
+		var day = ("0" + date.getDate()).slice(-2);
+		var month = ("0" + (date.getMonth()+1)).slice(-2);
+		return (date.getFullYear() + '-' + month + '-' + day);
+	}
+
+	
+	function afficheDateDispo()
+	{
+		var elementDate = $('.alert>span.dateDispo');
+		if(elementDate != undefined)
+		{
+			if(dateDispo != undefined)
+			{
+				elementDate.html(formaterDate(dateDispo));
+			}
+		}
+	}
+	
+	function initDateEmprunt()
+	{
+		var elementDate = $('input.dateEmprunt');
+		if(elementDate != undefined)
+		{
+			if(dateDispo != undefined && dateDispo > new Date())
+			{
+				elementDate.val(formaterDateInput(dateDispo));
+			}
+			else
+			{
+				elementDate.val(formaterDateInput(new Date()));
+			}
+		}
+	}
+
+	function calculDateRetour(){
+		var dateRetour = new Date($('input.dateEmprunt').val());
+		switch (typeMedia)
+		{
+			case "DVD":
+			case "CD":
+				dateRetour.setDate(dateRetour.getDate() + 15);
+				break;
+			case "Livre":
+				dateRetour.setDate(dateRetour.getDate() + 30);
+				break;
+		}
+		$('.dateRetour').val(formaterDateInput(dateRetour));
+	}
+</script>
+
+</head>
+<body class="container">
+	<header class="row jumbotron">
+		<div class="col-md-10 col-md-offset-1 col-xs-12">
+			<h1>Mediatic<small class="hidden-xs"> Fiche média</small></h1>
+		</div>
+		<div class="visible-xs-block col-xs-12">
+			<h1><small>Fiche média</small></h1>
+		</div>
+	</header>
+	
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Menu Tablette, PC -->
+			<ul class="hidden-xs nav navbar-nav">
+				<li><span class="navbar-brand">Média :</span></li>
+				<li><a href="rechercheMedia.html"><span class="glyphicon glyphicon-search"></span><span class="hidden-sm"> Recherche</span></a></li>
+				<li><a href="creationMedia.html"><span class="glyphicon glyphicon-plus"></span><span class="hidden-sm"> Création</span></a></li>
+				
+	        	<li><span class="navbar-brand glyphicon glyphicon-option-vertical"></span></li>
+	        	
+				<li><span class="navbar-brand">Adhérent :</span></li>
+				<li><a href="rechercheAdherent.html"><span class="glyphicon glyphicon-search"></span><span class="hidden-sm"> Recherche</span></a></li>
+				<li><a href="creationAdherent.html"><span class="glyphicon glyphicon-plus"></span><span class="hidden-sm"> Création</span></a></li>
+			</ul>
+				
+			<!-- Menu Téléphone -->
+			<ul class="nav navbar-nav visible-xs-block">
+				<li class="col-xs-6 dropdown">
+					<a href="#" class="col-xs-12 dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Média <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="rechercheMedia.html"><span class="glyphicon glyphicon-search"></span><span> Recherche</span></a></li>
+						<li><a href="creationMedia.html"><span class="glyphicon glyphicon-plus"></span><span> Création</span></a></li>
+					</ul>
+	        	</li>
+				<li class="col-xs-6 dropdown">
+					<a href="#" class="col-xs-12 dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Adhérent <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="rechercheAdherent.html"><span class="glyphicon glyphicon-search"></span><span> Recherche</span></a></li>
+						<li><a href="creationAdherent.html"><span class="glyphicon glyphicon-plus"></span><span> Création</span></a></li>
+					</ul>
+	        	</li>
+			</ul>
+		</div>
+	</nav>
+	
+	<main>
+		<div>
+			<h3>
+				<span class="infoType"> </span>
+				<span class=infoTitre>no info</span><small> par <span class="infoAuteur">no info</span></small>
+			</h3>
+		</div>
+		<br />
+		
+		<form method="GET" action="." class="form-horizontal">
+			<fieldset>
+				<legend>Modifier le média</legend>
+				<div class="form-group">
+					<label for="titre" class="control-label col-sm-2 hidden-xs">Titre</label>
+					<div class="col-sm-7 col-xs-12"> 
+						<input type="text" class="form-control" placeholder="Titre" name="titre" required="required">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="auteur" class="control-label col-sm-2 hidden-xs">Auteur</label>
+					<div class="col-sm-7 col-xs-12">
+						<input type="text" class="form-control" placeholder="Auteur" name="auteur" required="required">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="type" class="control-label col-sm-2 hidden-xs">Type</label>
+					<div class="col-sm-7 col-xs-12">
+						<select name="selectType" class="form-control">
+							<option>Livre</option>
+							<option>CD</option>
+							<option>DVD</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12 col-sm-offset-2">
+						<input class="btn btn-default" type="submit" value="Enregistrer">
+					</div>
+				</div>
+			</fieldset>
+		</form>
+		
+		<div class="alert alert-success" role="alert">Disponible</div>
+		</br>
+		<div class="alert alert-warning" role="alert">Emprunté par Moïse, sera disponible le <span class="dateDispo">25/05/2016</span></div>
+		
+		<form class="form-inline">
+			<fieldset>
+				<legend>Ajouter un prêt</legend>
+				<div class="form-group">
+					<label for="nom" class="hidden-xs">Nom</label>
+					<input type="text" class="form-control" placeholder="Nom" name="nom" required="required">
+				</div>
+				<div class="form-group">
+					<label for="dateEmprunt" class="hidden-xs">Date emprunt</label>
+					<input type="date" class="form-control dateEmprunt" name="dateEmprunt" required="required">
+				</div>
+				<div class="form-group">
+					<label for="dateRetour" class="hidden-xs">Date de retour</label>
+					<input type="date" class="form-control dateRetour" name="dateRetour" readonly>
+				</div>
+				<button type="submit" class="btn btn-default">Ajouter</button>
+			</fieldset>
+			</br>
+		</form>
+
+		<div>
+	    	<legend>Liste des adhérents ayant emprunté ce média</legend>
+	    	<div class=" tableau col-md-12">
+				<div class="responsive-table-line">
+					<table class="hidden-xs table table-hover table-bordered ">
+						<thead>
+							<tr class="entete" >
+								<th onclick="location.href='#';" style="cursor:pointer;">
+									<span>Nom </span>
+									<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								</th>
+								<th onclick="location.href='#';" style="cursor:pointer;">
+									<span>Prénom </span>
+									<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								</th>
+								<th onclick="location.href='#';" style="cursor:pointer;">
+									<span>Date </span>
+									<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
+								<td data-title="Nom"><span>Arthur</span></td>
+								<td data-title="Prénom"><span>Quentin</span></td>
+								<td data-title="Date"><span>19/06/2015</span></td>
+							</tr>
+							<tr onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
+								<td data-title="Nom"><span>Fort</span></td>
+								<td data-title="Prénom"><span>Mathieu</span></td>
+								<td data-title="Date"><span>25/05/2013</span></td>		
+							</tr>
+							<tr onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
+								<td data-title="Nom"><span>Link</span></td>
+								<td data-title="Prénom"><span>Zelda</span></td>
+								<td data-title="Date"><span>04/02/2014</span></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<div class=" visible-xs-block row" >
+						<div class="col-xs-6">
+							<a href="ficheAdherent.html"><div class="list">
+								<label>Nom :</label><span>Arthur</span><br>
+								<label>Prénom :</label><span>Quentin</span><br>
+								<label>Date :</label><span>19/06/2015</span><br>
+							</div></a>
+						</div>
+						<div class="col-xs-6">
+							<a href="ficheAdherent.html"><div class="list">
+								<label>Nom :</label><span>Fort</span><br>
+								<label>Prénom :</label><span>Mathieu</span><br>
+								<label>Date :</label><span>25/05/2013</span><br>
+							</div></a>
+						</div>
+						<div class="col-xs-6">
+							<a href="ficheAdherent.html"><div class="list">
+								<label>Nom :</label><span>Link</span><br>
+								<label>Prénom :</label><span>Zelda</span><br>
+								<label>Date :</label><span>04/02/2014</span><br>
+							</div></a>
+						</div>
+					</div>
+				</div>
+			</div>
+	    </div>
+	</main>
+</html>
