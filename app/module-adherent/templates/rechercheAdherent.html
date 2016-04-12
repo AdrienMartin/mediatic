@@ -1,4 +1,3 @@
-
 <header class="row jumbotron">
 	<div class="col-md-10 col-md-offset-1 col-xs-12">
 		<h1>
@@ -71,14 +70,14 @@
 				<div class="form-group">
 					<label>Identifiant</label>
 					<br />
-					<input class="form-control" type="text" placeholder="Commence par..." />
+					<input class="form-control" type="text" placeholder="Commence par..." ng-model="adhCtrl.filter.id"/>
 				</div>
 				<div class="form-group">
 					<label>Nom / Prénom</label>
 					<br />
-					<input class="form-control" type="text" placeholder="Contient..." />
+					<input class="form-control" type="text" placeholder="Contient..." ng-model="adhCtrl.filter.texte"/>
 				</div>
-				<button class="btn btn-default">Rechercher</button>
+				<button class="btn btn-default" ng-click="adhCtrl.rechercher()">Rechercher</button>
 			</form>
 		</div>
 	</div>
@@ -116,85 +115,46 @@
 						<td ng-bind="adherent.nom"></td>
 						<td ng-bind="adherent.prenom"></td>
 						<td ng-bind="adherent.date_naissance | date:'dd/MM/yyyy'"></td>
-						<td ng-bind="adherent.emprunt"></td>
 						<td ng-if="adherent.cotisation_correcte==true"><img src="img/valid.gif" /></td>
 						<td ng-if="adherent.cotisation_correcte==false"><img src="img/sup.gif" /></td>
+						<td ng-bind="adherent.emprunt"></td>
 					</tr>
 				</tbody>
 			</table>
 
 			<div class="grille visible-xs-block row">
-				<div class="col-xs-6">
-					<a href="ficheAdherent.html"><div class="list">
-							<label>Identifiant: </label>
-							<li class="">15866</li>
-							<br>
-							<label>Nom: </label>
-							<li>Larboulette</li>
-							<br>
-							<label>Prenom: </label>
-							<li>Pierre</li>
-							<br>
-							<label>Date de naissance: </label>
-							<li>10/11/1986</li>
-							<br>
-							<label>A jour cotisation: </label>
-							<li><img src="img/valid.gif" /></li>
-							<br>
-							<label>Nombre médias en possession: </label>
-							<li>1</li>
-							<br>
-
-						</div></a>
-
+			
+				<div class="col-xs-6" ng-show="adhCtrl.listeAdherents==undefined">
+					<span>Chargement du catalogue en cours</span>
 				</div>
-				<div class="col-xs-6">
-
-					<a href="ficheAdherent.html"><div class="list">
-							<label>Identifiant: </label>
-							<li class="">145</li>
-							<br>
-							<label>Nom: </label>
-							<li>Gerard</li>
-							<br>
-							<label>Prenom: </label>
-							<li>Sarah</li>
-							<br>
-							<label>Date de naissance: </label>
-							<li>01/01/1994</li>
-							<br>
-							<label>A jour cotisation: </label>
-							<li><img src="img/valid.gif" /></li>
-							<br>
-							<label>Nombre médias en possession: </label>
-							<li>1</li>
-							<br>
-
-						</div></a>
+				<div class="col-xs-6" ng-show="adhCtrl.hasErrorAdherent()">
+					<span>Erreur lors du chargement du catalogue</span>
 				</div>
-				<div class="col-xs-6">
-
+				
+				<div class="col-xs-6" ng-repeat="adherent in adhCtrl.listeAdherents">
 					<a href="ficheAdherent.html"><div class="list">
 							<label>Identifiant: </label>
-							<li class="">325</li>
+							<li ng-bind="adherent.id"></li>
 							<br>
 							<label>Nom: </label>
-							<li>Parker</li>
+							<li ng-bind="adherent.nom"></li>
 							<br>
 							<label>Prenom: </label>
-							<li>Matt</li>
+							<li ng-bind="adherent.prenom"></li>
 							<br>
 							<label>Date de naissance: </label>
-							<li>15/04/1970</li>
+							<li ng-bind="adherent.date_naissance | date:'dd/MM/yyyy'"></li>
 							<br>
 							<label>A jour cotisation: </label>
-							<li><img src="img/sup.gif" /></li>
+							<li ng-if="adherent.cotisation_correcte==true"><img src="img/valid.gif" /></li>
+							<li ng-if="adherent.cotisation_correcte==false"><img src="img/sup.gif" /></li>
 							<br>
 							<label>Nombre médias en possession: </label>
-							<li>1</li>
+							<li ng-bind="adherent.emprunt"></li>
 							<br>
 
 						</div></a>
+
 				</div>
 			</div>
 		</div>
