@@ -20,7 +20,9 @@ angular.module('ModuleMedia').service('ListeMediaService', ['$http',function($ht
 							titre : itemFromServeur.titre,
 							auteur : itemFromServeur.auteur,
 							type : itemFromServeur.type,
-							emprunteur : itemFromServeur.emprunteur
+							emprunteur : itemFromServeur.emprunteur,
+							emprunteurs : itemFromServeur.emprunteurs,
+							retour : (itemFromServeur.retour != undefined)?new Date(itemFromServeur.retour):""
 					};
 					medias.push(itemForIHM);
 				}
