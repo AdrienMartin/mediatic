@@ -39,7 +39,7 @@ public class AdherentDAO extends GenericDAO<Adherent>{
 	      
 		return adherent;
 	}
-	// TODO: etendre la recherche 
+
 	public List<Object[]> recherche(String identifiant,String nom, int typeTrie){		
 		String desc="";
 		String trie="";
@@ -59,11 +59,12 @@ public class AdherentDAO extends GenericDAO<Adherent>{
 		}
 		
 		EntityManager em = DatabaseHelper.createEntityManager();
-		Query q = em.createQuery("Select a, ("
-				+ "Select count(b) "
-				+ "from b "
-				+ "where (b.dateRetour is null or b.dateRetour > now()) "
-				+ "and b.emprunteur = a"
+		Query q = em.createQuery("Select a, "
+				+ "("
+					+ "Select count(b) "
+					+ "from b "
+					+ "where (b.dateRetour is null or b.dateRetour > now()) "
+					+ "and b.emprunteur = a"
 				+ ") "
 				+ "From Adherent a "
 				+ "left join a.emprunts b "
@@ -76,14 +77,72 @@ public class AdherentDAO extends GenericDAO<Adherent>{
 	    q.setParameter("nom", "%"+nom+"%");
 	    
 	    List<Object[]> adherentsTemp = q.getResultList();
-	    System.out.println(adherentsTemp.get(0)[0]);
-	    System.out.println(adherentsTemp.get(0)[1]);
-	    System.out.println(adherentsTemp.get(1)[0]);
-	    System.out.println(adherentsTemp.get(1)[1]);
-	    System.out.println(adherentsTemp.get(2)[0]);
-	    System.out.println(adherentsTemp.get(2)[1]);
+	    for(int i = 0; i < adherentsTemp.size(); i++)
+	    {
+	    	for(int j = 0; j < adherentsTemp.get(i).length; j++)
+	    	{
+	    	    System.out.println(adherentsTemp.get(i)[j]);
+	    	}
+	    }
 	    
 	    return adherentsTemp;
+		
+	}
+	
+	public List<Object[]> rechercheMediasEmpruntes(Adherent adherent, int typeTrie)
+	{		
+		String desc="";
+		String trie="";
+		
+		EntityManager em = DatabaseHelper.createEntityManager();
+		
+		switch(typeTrie/2){
+			
+			
+			case 1: trie="auteur";break;
+			case 2: trie="typeMedia";break;
+			case 3: trie="date";
+			case 4: trie="nomPrenom";
+			default: trie="titre";
+		}
+		if((typeTrie%2)==1){
+			
+			desc="desc";
+			
+		}
+		Query q = em.createQuery("Select m, "
+				+ "("
+					+ "Select e.dateRetour as date "
+					+ "from e "
+					+ "where (e.dateRetour is null or e.dateRetour > now()) "
+					+ "and e.media = m"
+				+ "), "
+				+ "("
+					+ "Select concat(a.nom, ' ', a.prenom) as nomPrenom "
+					+ "from a "
+					+ "where e.emprunteur = a"
+				+ ") "
+				+ "From Media m "
+				+ "join m.emprunts e "
+				+ "join e.emprunteur a "
+				+ "where a.id = :id "
+				+ "order by " + trie + " " + desc);
+		
+	    q.setParameter("id", adherent.getId());
+	    
+	    List<Object[]> mediasTemp = q.getResultList();
+
+	    System.out.println(mediasTemp.size());
+	    
+	    for(int i = 0; i < mediasTemp.size(); i++)
+	    {
+	    	for(int j = 0; j < mediasTemp.get(i).length; j++)
+	    	{
+	    	    System.out.println(mediasTemp.get(i)[j]);
+	    	}
+	    }
+	    
+		return mediasTemp;
 		
 	}
 	

@@ -33,7 +33,7 @@ public class Media {
 	private TypeMedia typeMedia;
 	
 	@OneToMany(mappedBy="media")
-	private List<Emprunt> emprunt;
+	private List<Emprunt> emprunts;
 	
 	public Long getId() {
 		return id;
