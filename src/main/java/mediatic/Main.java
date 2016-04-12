@@ -74,25 +74,45 @@ public class Main {
 		med3.setTitre("3titre");
 		med3.setAuteur("3auteur");
 		med3.setTypeMedia(Media.TypeMedia.CD);
+
+		Media med4=new Media();
+		med4.setTitre("4titre");
+		med4.setAuteur("4auteur");
+		med4.setTypeMedia(Media.TypeMedia.DVD);
 		
 		med1=daoMe.persist(med1);
 		med2=daoMe.persist(med2);
 		med3=daoMe.persist(med3);
+		med4=daoMe.persist(med4);
 		
 		Emprunt emp1=new Emprunt();
 		emp1.setDateEmprunt(new Date());
 		//emp.setDateRetour(new Date());
 		emp1.setEmprunteur(ad1);
 		emp1.setMedia(med1);
-		
+
 		Emprunt emp2=new Emprunt();
 		emp2.setDateEmprunt(new Date());
 		//emp.setDateRetour(new Date());
 		emp2.setEmprunteur(ad4);
 		emp2.setMedia(med3);
+		
+		Emprunt emp3=new Emprunt();
+		emp3.setDateEmprunt(new Date());
+		emp3.setDateRetour(new Date());
+		emp3.setEmprunteur(ad1);
+		emp3.setMedia(med4);
+		
+		Emprunt emp4=new Emprunt();
+		emp4.setDateEmprunt(new Date());
+		//emp4.setDateRetour(new Date());
+		emp4.setEmprunteur(ad1);
+		emp4.setMedia(med4);
 
 		emp1=daoEm.persist(emp1);
 		emp2=daoEm.persist(emp2);
+		emp3=daoEm.persist(emp3);
+		emp4=daoEm.persist(emp4);
 		
 		System.out.println("----------------------------------------------------------");
 		System.out.println(daoAd.identification("identtg", "mdp"));
@@ -102,6 +122,11 @@ public class Main {
 		System.out.println(daoAd.recherche("", "", 10));
 		System.out.println("----------------------------------------------------------");
 		System.out.println(daoMe.recherche("", "", Media.TypeMedia.CD, 9));
+		System.out.println("----------------------------------------------------------");
+		System.out.println(daoAd.rechercheMediasEmpruntes(ad1, 1));
+		System.out.println("----------------------------------------------------------");
+		System.out.println(daoMe.rechercheAdherentEmprunteur(med4, 1));
+		
 	}
 
 }

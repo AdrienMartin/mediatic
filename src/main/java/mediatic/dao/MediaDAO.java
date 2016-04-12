@@ -87,5 +87,41 @@ public class MediaDAO extends GenericDAO<Media>{
 	}
 	
 
-
+	public List<Object[]> rechercheAdherentEmprunteur(Media media, int typeTrie){		
+		String desc="";
+		String trie="";
+		switch(typeTrie/2){
+				
+			case 1: trie="prenom";break;
+			case 2: trie="dateRetour";break;
+			default: trie="nom";
+		}
+		if((typeTrie%2)==1){
+				
+			desc="desc";
+				
+		}
+		
+		EntityManager em = DatabaseHelper.createEntityManager();
+		Query q = em.createQuery("Select a.nom, a.prenom, b.dateRetour "
+				+ "From Adherent a "
+				+ "join a.emprunts b "
+				+ "join b.media m "
+				+ "where m.id = :id "
+				+ "order by " + trie + " " +desc);
+				
+		q.setParameter("id", media.getId());
+	    
+	    List<Object[]> adherentsTemp = q.getResultList();
+	    for(int i = 0; i < adherentsTemp.size(); i++)
+	    {
+	    	for(int j = 0; j < adherentsTemp.get(i).length; j++)
+	    	{
+	    	    System.out.println(adherentsTemp.get(i)[j]);
+	    	}
+	    }
+	    
+	    return adherentsTemp;
+		
+	}
 }
