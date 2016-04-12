@@ -11,21 +11,21 @@ angular.module('ModuleMedia').controller('MediaController', ['$http', '$rootScop
 
 	myCtrl.medias = undefined;
 	
-	ListeMediaService.getListe().then(function(response)
-	{
-		myCtrl.medias = response;
-	}, function(){
-		// En cas d'erreur
-		myCtrl.medias = -1;
-	});
-	
 	myCtrl.hasErrorMedias = function()
 	{
 		return !(myCtrl.medias===undefined || (_.isArray(myCtrl.medias) && myCtrl.medias.length>0));
 	}
 	
-	myCtrl.changeParams = function()
+	myCtrl.getListe = function()
 	{
-		console.log(myCtrl.filters);
+		ListeMediaService.getPromise(myCtrl.filters).then(function(response)
+		{
+			myCtrl.medias = response;
+		}, function(){
+			// En cas d'erreur
+			myCtrl.medias = -1;
+		});
 	}
+	
+	myCtrl.getListe();
 }]);

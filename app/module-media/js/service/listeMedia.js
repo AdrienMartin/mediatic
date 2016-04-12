@@ -2,40 +2,41 @@ angular.module('ModuleMedia').service('ListeMediaService', ['$http',function($ht
 {
 	var self = this;
 	var url = "http://10.34.10.140:8080/resource/media.recherche";
-	var promise = undefined;
 
-	var initPromise = function()
+	self.getPromise = function(params)
 	{
-		if(promise == undefined)
+		var urlParams = {params:{}};
+		if(params.titre != undefined)
 		{
-			promise = $http.get(url).then(function(response)
-			{
-				var medias = [];
-				for(var index in response.data)
-				{
-					var itemFromServeur = response.data[index];
-					var itemForIHM =
-					{
-							id : itemFromServeur.id,
-							titre : itemFromServeur.titre,
-							auteur : itemFromServeur.auteur,
-							type : itemFromServeur.type,
-							emprunteur : itemFromServeur.emprunteur,
-							emprunteurs : itemFromServeur.emprunteurs,
-							retour : (itemFromServeur.retour != undefined)?new Date(itemFromServeur.retour):""
-					};
-					medias.push(itemForIHM);
-				}
-
-				console.log(medias);
-				return medias;
-			});
+			urlParams.params.titre = params.titre;
 		}
-	}
-	
-	self.getListe = function()
-	{
-		initPromise();
-		return promise;
+		if(params.auteur != undefined)
+		{
+			urlParams.params.auteur = params.auteur;
+		}
+		if(params.type != undefined)
+		{
+			urlParams.params.type = params.type;
+		}
+		return $http.get(url,urlParams).then(function(response)
+		{
+			var medias = [];
+			for(var index in response.data)
+			{
+				var itemFromServeur = response.data[index];
+				var itemForIHM =
+				{
+						id : itemFromServeur.id,
+						titre : itemFromServeur.titre,
+						auteur : itemFromServeur.auteur,
+						type : itemFromServeur.type,
+						emprunteur : itemFromServeur.emprunteur,
+						emprunteurs : itemFromServeur.emprunteurs,
+						retour : (itemFromServeur.retour != undefined)?new Date(itemFromServeur.retour):""
+				};
+				medias.push(itemForIHM);
+			}
+			return medias;
+		});
 	}
 }]);
