@@ -8,7 +8,7 @@ angular.module('ModuleAdherent').service('RechercheAdherentService', ['$http', '
     {
         if(promise == undefined)
         {
-            promise = $http.post(url).then(function(response)
+            promise = $http.get(url).then(function(response)
             {
                 var adherents = [];
                 for(var index in response.data)
@@ -18,11 +18,11 @@ angular.module('ModuleAdherent').service('RechercheAdherentService', ['$http', '
                             id : itemFromServeur.id,
                             nom : itemFromServeur.nom,
                             prenom : itemFromServeur.prenom,
-                            date_naissance : itemFromServeur.date_naissance,
-                            cotisation_correcte: itemFromServeur.cotisation_correcte,
-                            email : itemFromServeur.email,
-                            age : itemFromServeur.age
+                            date_naissance : new Date(itemFromServeur.date_naissance),
+                            cotisation_correcte : itemFromServeur.cotisation_correcte,
+                            emprunt : itemFromServeur.nombre_media
                     };
+           
                     adherents.push(itemForIHM);
                 }
                 return adherents;

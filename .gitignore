@@ -4,3 +4,4 @@ target/
 .project
 app/bower_components/
 node_modules/
+/maquette/
