@@ -25,13 +25,13 @@
 							<option>Livre</option>
 						</select>
 					</div>
-				<button class="btn btn-default ">Rechercher</button>
+				<button ng-click="medCtrl.changeParams()" class="btn btn-default">Rechercher</button>
 				</form>
 			</div>
 		</div>
 		
 		<div class="tableau col-md-8">
-			<span class="titre_tab">Liste des Médias</span>
+			<span class="titre_tab">Liste des MÃ©dias</span>
 			<div class="responsive-table-line">
 				<table class="hidden-xs table table-hover table-bordered ">
 					<thead>
@@ -39,7 +39,7 @@
 							<th><a href="">Type <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
 							<th><a href="">Titre <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
 							<th><a href="">Auteur <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
-							<th ><a href="">Emprunté par <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+							<th ><a href="">EmpruntÃ© par <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
 							<th ><a href="">Date de retour <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
 						</tr>
 					</thead>
@@ -62,68 +62,27 @@
 							</td>
 							<td ng-bind="media.titre" data-title="Titre"></td>
 							<td ng-bind="media.auteur" data-title="Auteur"></td>
-							<td ng-bind="media.emprunteur.nom media.emprunteur.prenom" data-title="Emprunté par"></td>
-							<td data-title="Date de retour">10/03/2016</td>
-						</tr>
-						<tr onclick="location.href='ficheMedia.html';" style="cursor:pointer;">
-							<td data-title="Type"><span class="glyphicon glyphicon-book" aria-hidden="true"></span></td>
-							<td data-title="Titre">Mon histoire</td>
-							<td data-title="Auteur">Dan Carter</td>
-							<td data-title="Emprunté par">Matt Parker</td>
-							<td data-title="Date de retour">10/03/2016</td>
-						
-						</tr>
-						<tr onclick="location.href='ficheMedia.html';" style="cursor:pointer;">
-							
-							<td data-title="Type"><span class="glyphicon glyphicon-music" aria-hidden="true"></span></td>
-							<td data-title="Titre">Racine carrée</td>
-							<td data-title="Auteur">Stromae</td>
-							<td data-title="Emprunté par">Sarah Gerard</td>
-							<td data-title="Date de retour">20/03/2016</td>
-						
-						</tr>
-						<tr onclick="location.href='ficheMedia.html';" style="cursor:pointer;">
-							
-							<td data-title="Type"><span class="glyphicon glyphicon-film" aria-hidden="true"></span></td>
-							<td data-title="Titre">Les tuches 2</td>
-							<td data-title="Auteur">Olivier Baroux</td>
-							<td data-title="Emprunté par">Pierre Larboulette</td>
-							<td data-title="Date de retour">25/04/2016</td>
+							<td ng-bind="media.emprunteur.nom + ' ' + media.emprunteur.prenom" data-title="EmpruntÃ© par"></td>
+							<td ng-bind="media.retour | date:'dd/MM/yyyy'" data-title="Date de retour"></td>
 						</tr>
 					</tbody>
 				</table>
 				
 				<div class=" visible-xs-block row" >
-					<div class="col-xs-6">
-						<a href="ficheMedia.html"><div class="list">
-							<span class="glyphicon glyphicon-book" aria-hidden="true"> </span>
-							<label>Titre: </label><li> Mon histoire</li><br>					
-							<label>Auteur: </label> <li> Dan Carter<li><br>
-							<label>Emprunté par: </label><li> Matt Parker</li><br>
-							<label>Date de retour: </label><li> 10/03/2016</li><br>
-						
-						</div></a>
-						
-					</div>
-					<div class="col-xs-6">
-						<a href="ficheMedia.html"><div class="list">
-							<span class="glyphicon glyphicon-music" aria-hidden="true"></span>
-							<label>Titre: </label><li> Racine carrée</li><br>
-							<label>Auteur: </label> <li> Stromae<li><br>
-							<label>Emprunté par: </label><li> Sarah Gerard</li><br>
-							<label>Date de retour: </label><li> 20/03/2016</li><br>
-						
-						</div></a>
-					</div>
-					<div class="col-xs-6">
-						<a href="ficheMedia.html"><div class="list">
-							<span class="glyphicon glyphicon-film" aria-hidden="true"></span>
-							<label>Titre: </label><li> Les tuches 2</li><br>
-							<label>Auteur: </label> <li> Olivier Baroux<li><br>
-							<label>Emprunté par: </label><li> Pierre Larboulette</li><br>
-							<label>Date de retour: </label><li> 25/04/2016</li><br>
-						
-					</div></a>
+					<div ng-repeat="media in medCtrl.medias" class="col-xs-6">
+						<a href="ficheMedia.html">
+							<div class="list">
+								<span  ng-switch on="media.type">
+									<span ng-switch-when="Livre" class="glyphicon glyphicon-book" aria-hidden="true"></span>
+									<span ng-switch-when="CD" class="glyphicon glyphicon-music" aria-hidden="true"></span>
+									<span ng-switch-when="DVD" class="glyphicon glyphicon-film" aria-hidden="true"></span>
+								</span>
+								<label>Titre: </label><li ng-bind="media.titre"></li><br>					
+								<label>Auteur: </label><li ng-bind="media.auteur"><li><br>
+								<label>EmpruntÃ© par: </label><li ng-bind="media.emprunteur.nom + ' ' + media.emprunteur.prenom"></li><br>
+								<label>Date de retour: </label><li ng-bind="media.retour | date:'dd/MM/yyyy'"></li><br>
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>

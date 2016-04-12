@@ -1,8 +1,13 @@
-angular.module('ModuleMedia').controller('MediaController', ['RechercheMediaService', 'ListeMediaService', function(RechercheMediaService, ListeMediaService)
+angular.module('ModuleMedia').controller('MediaController', ['$http', '$rootScope', 'MediaService', 'ListeMediaService', function($http, $rootScope, MediaService, ListeMediaService)
 {
 	var myCtrl = this;
 	
-	myCtrl.filters = RechercheMediaService;
+	// Je défini l'attribut PAGE pas si il n'ai pas déjà défini
+	$rootScope.page = $rootScope.page || {};
+	// Je défini l'attribut TITRE de PAGE
+	$rootScope.page.titre = "Medias";
+	
+	myCtrl.filters = MediaService.get('rechercheFilters');
 
 	myCtrl.medias = undefined;
 	
@@ -17,5 +22,10 @@ angular.module('ModuleMedia').controller('MediaController', ['RechercheMediaServ
 	myCtrl.hasErrorMedias = function()
 	{
 		return !(myCtrl.medias===undefined || (_.isArray(myCtrl.medias) && myCtrl.medias.length>0));
+	}
+	
+	myCtrl.changeParams = function()
+	{
+		console.log(myCtrl.filters);
 	}
 }]);

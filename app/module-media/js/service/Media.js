@@ -1,4 +1,4 @@
-angular.module('ModuleMedia').service('RechercheMediaService', [function()
+angular.module('ModuleMedia').service('MediaService', [function()
 {
 	var status = {};
 	this.get = function(key)
