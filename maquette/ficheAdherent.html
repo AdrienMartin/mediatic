@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fiche Adhérent</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/ficheAdherent.css">
+<link rel="stylesheet" type="text/css" href="css/rechercheMedia.css">
+<link rel="stylesheet" media="screen and (max-width:800px)" type="text/css" href="css/rechercheMedia_tel.css" >
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="bootstrap/js/jquery-1.12.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	"use strict";
+	
+	function formaterDateInput(date){
+		// format string au format date pour l'input Date
+		var day = ("0" + date.getDate()).slice(-2);
+		var month = ("0" + (date.getMonth()+1)).slice(-2);
+		return (date.getFullYear() + '-' + month + '-' + day);
+	}
+	function dateEmpruntToday(){
+		var today = formaterDateInput(new Date());
+		$('input.dateEmprunt').val(today);
+	}
+	function calculDateRetour(){
+		var dateRetour = new Date($('input.dateEmprunt').val());
+		dateRetour.setDate(dateRetour.getDate() + 30);
+		$('.dateRetour').val(formaterDateInput(dateRetour));
+	}
+	$(function() {
+		dateEmpruntToday();
+		calculDateRetour();
+		// calcul date retour automatique
+		$('input.dateEmprunt').change(function() {
+			var dateRetour = new Date($('input.dateEmprunt').val());
+			dateRetour.setDate(dateRetour.getDate() + 30);
+			$('.dateRetour').val(formaterDateInput(dateRetour));
+		});
+	});
+</script>
+
+</head>
+<body class="container">
+	<header class="row jumbotron">
+		<div class="col-md-10 col-md-offset-1 col-xs-12">
+			<h1>Mediatic<small class="hidden-xs"> Fiche d'adhérent</small></h1>
+		</div>
+		<div class="visible-xs-block col-xs-12">
+			<h1><small>Fiche d'adhérent</small></h1>
+		</div>
+	</header>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Menu Tablette, PC -->
+			<ul class="hidden-xs nav navbar-nav">
+				<li><span class="navbar-brand">Média :</span></li>
+				<li><a href="rechercheMedia.html"><span class="glyphicon glyphicon-search"></span><span class="hidden-sm"> Recherche</span></a></li>
+				<li><a href="creationMedia.html"><span class="glyphicon glyphicon-plus"></span><span class="hidden-sm"> Création</span></a></li>
+				
+	        	<li><span class="navbar-brand glyphicon glyphicon-option-vertical"></span></li>
+	        	
+				<li><span class="navbar-brand">Adhérent :</span></li>
+				<li><a href="rechercheAdherent.html"><span class="glyphicon glyphicon-search"></span><span class="hidden-sm"> Recherche</span></a></li>
+				<li><a href="creationAdherent.html"><span class="glyphicon glyphicon-plus"></span><span class="hidden-sm"> Création</span></a></li>
+			</ul>
+				
+			<!-- Menu Téléphone -->
+			<ul class="nav navbar-nav visible-xs-block">
+				<li class="col-xs-6 dropdown">
+					<a href="#" class="col-xs-12 dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Média <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="rechercheMedia.html"><span class="glyphicon glyphicon-search"></span><span> Recherche</span></a></li>
+						<li><a href="creationMedia.html"><span class="glyphicon glyphicon-plus"></span><span> Création</span></a></li>
+					</ul>
+	        	</li>
+				<li class="col-xs-6 dropdown">
+					<a href="#" class="col-xs-12 dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Adhérent <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="rechercheAdherent.html"><span class="glyphicon glyphicon-search"></span><span> Recherche</span></a></li>
+						<li><a href="creationAdherent.html"><span class="glyphicon glyphicon-plus"></span><span> Création</span></a></li>
+					</ul>
+	        	</li>
+			</ul>
+		</div>
+	</nav>
+	<main>
+		<form method="GET" action="." class="form-horizontal">
+			<fieldset>
+				<legend>Modifier ses informations personnelles</legend>
+				<div class="form-group">
+					<label for="nom" class="control-label col-sm-2 hidden-xs">Nom</label>
+					<div class="col-sm-4 col-xs-6"> 
+						<input type="text" class="form-control" placeholder="Nom" name="nom" required="required">
+					</div>
+					<label for="prenom" class="control-label col-sm-2 hidden-xs">Prénom</label>
+					<div class="col-sm-4 col-xs-6">
+						<input type="text" class="form-control" placeholder="Prénom" name="prenom" required="required">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="dateNaissance" class="control-label col-sm-2 hidden-xs">Date de naissance</label>
+					<div class="col-sm-4 col-xs-6"> 
+						<input type="date" class="form-control" id="dateNaissance" name="dateNaissance" placeholder="Date de naissance" required="required">
+					</div>
+					<label for="age" class="control-label col-sm-2 hidden-xs">Âge</label>
+					<div class="col-sm-4 col-xs-6">
+						<input type="text" class="form-control" id='age' placeholder="Âge" name="age"readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="mail" class="control-label col-sm-2 hidden-xs">E-mail</label>
+					<div class="col-sm-10 col-xs-12"> 
+						<input type="email" class="form-control" placeholder="E-mail" name="mail" required="required">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="adresse" class="control-label col-sm-2 hidden-xs">Adresse</label>
+					<div class="col-sm-10 col-xs-12"> 
+						<input type="text" class="form-control" placeholder="Adresse" name="adresse">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="adresse" class="control-label col-sm-2 hidden-xs">Adresse (suite)</label>
+					<div class="col-sm-10 col-xs-12"> 
+						<input type="text" class="form-control" placeholder="Adresse" name="adresse">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="codePostal" class="control-label col-sm-2 hidden-xs">Code Postal</label>
+					<div class="col-sm-4 col-xs-6"> 
+						<input type="text" class="form-control" placeholder="Code Postal" name="nom" maxLength="5">
+					</div>
+					<label for="ville" class="control-label col-sm-2 hidden-xs">Ville</label>
+					<div class="col-sm-4 col-xs-6">
+						<input type="text" class="form-control" placeholder="Ville" name="ville">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="datePaiement" class="control-label col-sm-2 hidden-xs">Date de paiement de la cotisation</label>
+					<div class="col-sm-4 col-xs-6"> 
+						<input type="date" id="datePaiement" class="form-control" name="datePaiement" placeholder="Date de paiement de la cotisation">
+					</div>
+					<label for="dateFinAbonnement" class="control-label col-sm-2 hidden-xs">Date de fin d’abonnement</label>
+					<div class="col-sm-4 col-xs-6">
+						<input type="date" class="form-control" id='finAbonnement' name="dateFinAbonnement" placeholder="Date de fin d’abonnement" readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="montantCotisation" class="control-label col-sm-2 hidden-xs">Montant de la cotisation</label>
+					<div class="col-sm-4 col-xs-12"> 
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Montant de la cotisation" name="montantCotisation" maxLength="6">
+							<span class="input-group-addon">€</span>
+						</div>
+
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12 col-sm-offset-2">
+						<input class="btn btn-default" type="submit" value="Enregistrer">
+					</div>
+				</div>
+			</fieldset>
+		</form>
+
+		<form class="form-inline">
+			<fieldset>
+	    		<legend>Ajouter un média emprunté</legend>
+				<div class="form-group">
+					<label for="titre" class="hidden-xs">Titre</label>
+					<input type="text" class="form-control" placeholder="Titre" name="titre" required="required">
+				</div>
+				<div class="form-group">
+					<label for="dateEmprunt" class="hidden-xs">Date emprunt</label>
+					<input type="date" class="form-control dateEmprunt" name="dateEmprunt" required="required">
+				</div>
+				<div class="form-group">
+					<label for="dateRetour" class="hidden-xs">Date de retour</label>
+					<input type="date" class="form-control dateRetour" name="dateRetour" readonly>
+				</div>
+				<button type="submit" class="btn btn-default">Ajouter</button>
+			</fieldset>
+			</br>
+		</form>
+
+		<div>
+		    <legend>Liste des médias empruntés</legend>
+
+		    <div class=" tableau col-md-12">
+				<div class="responsive-table-line">
+					<table class="hidden-xs table table-hover table-bordered ">
+						<thead>
+							<tr class="entete" >
+								<th><a href="">Type <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+								<th><a href="">Titre <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+								<th><a href="">Auteur <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
+								<th ><a href="">Emprunté par <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+								<th ><a href="">Date de retour <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr onclick="location.href='ficheMedia.html';" style="cursor:pointer;">
+								<td data-title="Type"><span class="glyphicon glyphicon-book" aria-hidden="true"></span></td>
+								<td data-title="Titre">Mon histoire</td>
+								<td data-title="Auteur">Dan Carter</td>
+								<td data-title="Emprunté par">Matt Parker</td>
+								<td data-title="Date de retour">10/03/2016</td>
+							
+							</tr>
+							<tr onclick="location.href='ficheMedia.html';" style="cursor:pointer;">
+								
+								<td data-title="Type"><span class="glyphicon glyphicon-music" aria-hidden="true"></span></td>
+								<td data-title="Titre">Racine carrée</td>
+								<td data-title="Auteur">Stromae</td>
+								<td data-title="Emprunté par">Sarah Gerard</td>
+								<td data-title="Date de retour">20/03/2016</td>
+							
+							</tr>
+							<tr onclick="location.href='ficheMedia.html';" style="cursor:pointer;">
+								
+								<td data-title="Type"><span class="glyphicon glyphicon-film" aria-hidden="true"></span></td>
+								<td data-title="Titre">Les tuches 2</td>
+								<td data-title="Auteur">Olivier Baroux</td>
+								<td data-title="Emprunté par">Pierre Larboulette</td>
+								<td data-title="Date de retour">25/04/2016</td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<div class=" visible-xs-block row" >
+						<div class="col-xs-6">
+							<a href="ficheMedia.html"><div class="list">
+								<span class="glyphicon glyphicon-book" aria-hidden="true"> </span>
+								<label>Titre: </label><li> Mon histoire</li><br>					
+								<label>Auteur: </label> <li> Dan Carter<li><br>
+								<label>Emprunté par: </label><li> Matt Parker</li><br>
+								<label>Date de retour: </label><li> 10/03/2016</li><br>
+							
+							</div></a>
+							
+						</div>
+						<div class="col-xs-6">
+							<a href="ficheMedia.html"><div class="list">
+								<span class="glyphicon glyphicon-music" aria-hidden="true"></span>
+								<label>Titre: </label><li> Racine carrée</li><br>
+								<label>Auteur: </label> <li> Stromae<li><br>
+								<label>Emprunté par: </label><li> Sarah Gerard</li><br>
+								<label>Date de retour: </label><li> 20/03/2016</li><br>
+							
+							</div></a>
+						</div>
+						<div class="col-xs-6">
+							<a href="ficheMedia.html"><div class="list">
+								<span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+								<label>Titre: </label><li> Les tuches 2</li><br>
+								<label>Auteur: </label> <li> Olivier Baroux<li><br>
+								<label>Emprunté par: </label><li> Pierre Larboulette</li><br>
+								<label>Date de retour: </label><li> 25/04/2016</li><br>
+							
+						</div></a>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</main>
+</html>

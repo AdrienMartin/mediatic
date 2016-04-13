@@ -42,10 +42,10 @@
 
 </head>
 <body class="container" ng-controller="TopController as topCtrl">
-	<div ng-if="!topCtrl.isConnected()">
+	<div ng-if="topCtrl.isConnected()">
 		<ng-view></ng-view>
 	</div>
-	<div ng-if="topCtrl.isConnected()">
+	<div ng-if="!topCtrl.isConnected()">
 		<div ng-include="'./module-global/templates/login.html'"></div>
 	</div>
 	
