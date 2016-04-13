@@ -96,11 +96,11 @@
 				<div class="form-group">
 					<label for="dateNaissance" class="control-label col-sm-2 hidden-xs">Date de naissance</label>
 					<div class="col-sm-4 col-xs-6"> 
-						<input ng-model="adhCtrl.adherent.date_naissance" type="date" class="form-control" id="dateNaissance" name="dateNaissance" placeholder="Date de naissance" required="required">
+						<input ng-model="adhCtrl.adherent.date_naissance" type="date" class="form-control" id="dateNaissance" name="dateNaissance" placeholder="Date de naissance" required="required" ng-change="adhCtrl.calculAge(adhCtrl.adherent.date_naissance)">
 					</div>
 					<label for="age" class="control-label col-sm-2 hidden-xs">Age</label>
 					<div class="col-sm-4 col-xs-6">
-						<input type="text" class="form-control" id='age' placeholder="Age" name="age"readonly>
+						<input ng-model="adhCtrl.adherent.age" type="text" class="form-control" id='age' placeholder="Age" name="age"readonly>
 					</div>
 				</div>
 				<div class="form-group">
@@ -134,11 +134,11 @@
 				<div class="form-group">
 					<label for="datePaiement" class="control-label col-sm-2 hidden-xs">Date de paiement de la cotisation</label>
 					<div class="col-sm-4 col-xs-6"> 
-						<input ng-model="adhCtrl.adherent.debutCotisation" type="date" id="datePaiement" class="form-control" name="datePaiement" placeholder="Date de paiement de la cotisation">
+						<input ng-model="adhCtrl.adherent.debutCotisation" type="date" id="datePaiement" class="form-control" name="datePaiement" placeholder="Date de paiement de la cotisation"  ng-change="adhCtrl.calculFinAbonnement(adhCtrl.adherent.debutCotisation)">
 					</div>
 					<label for="dateFinAbonnement" class="control-label col-sm-2 hidden-xs">Date de fin d'abonnement</label>
 					<div class="col-sm-4 col-xs-6">
-						<input type="date" class="form-control" id='finAbonnement' name="dateFinAbonnement" placeholder="Date de fin d�abonnement" readonly>
+						<input ng-model="adhCtrl.adherent.finCotisation" type="date" class="form-control" id='finAbonnement' name="dateFinAbonnement" placeholder="Date de fin d'abonnement" readonly>
 					</div>
 				</div>
 				<div class="form-group">
@@ -190,18 +190,17 @@
 								<th><a href="">Type <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
 								<th><a href="">Titre <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
 								<th><a href="">Auteur <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
-								<th ><a href="">Emprunté par <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+								<th ><a href="">Date d'emprunt <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
 								<th ><a href="">Date de retour <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
 							</tr>
 						</thead>
 						<tbody>
-<!-- 						TODO : se connecte rau service media pour récuperer les infos suivant l'id du media -->
-							<tr ng-repeat="emprunts in adhCtrl.adherent.medias" style="cursor:pointer;">
+							<tr ng-repeat="emprunts in adhCtrl.adherent.medias" ng-click="adhCtrl.showMedia(emprunts.media.id)" style="cursor:pointer;">
 								<td data-title="Type"><span class="glyphicon glyphicon-book" aria-hidden="true"></span></td>
 								<td data-title="Titre" ng-bind="emprunts.media.titre"></td>
 								<td data-title="Auteur" ng-bind="emprunts.media.titre"></td>
-								<td data-title="Emprunté par" ng-bind="emprunts.media.titre"></td>
-								<td data-title="Date de retour" ng-bind="emprunts.media.titre"></td>
+								<td data-title="Date d'emprunt" ng-bind="emprunts.depart | date:'dd/MM/yyyy'"></td>
+								<td data-title="Date de retour" ng-bind="emprunts.retour | date:'dd/MM/yyyy'"></td>
 							
 							</tr>
 						</tbody>
@@ -209,35 +208,15 @@
 					
 					<div class=" visible-xs-block row" >
 						<div class="col-xs-6">
-							<a href="ficheMedia.html"><div class="list">
+							<a href="" ng-repeat="emprunts in adhCtrl.adherent.medias" ng-click="adhCtrl.showMedia(emprunts.media.id)"><div class="list">
 								<span class="glyphicon glyphicon-book" aria-hidden="true"> </span>
-								<label>Titre: </label><li> Mon histoire</li><br>					
-								<label>Auteur: </label> <li> Dan Carter<li><br>
-								<label>Emprunté par: </label><li> Matt Parker</li><br>
-								<label>Date de retour: </label><li> 10/03/2016</li><br>
+								<label>Titre: </label><li ng-bind="emprunts.media.titre"></li><br>					
+								<label>Auteur: </label> <li ng-bind="emprunts.media.titre"><li><br>
+								<label>Date d'emprunt: </label><li ng-bind="emprunts.depart | date:'dd/MM/yyyy'"> </li><br>
+								<label>Date de retour: </label><li ng-bind="emprunts.retour | date:'dd/MM/yyyy'"> </li><br>
 							
 							</div></a>
 							
-						</div>
-						<div class="col-xs-6">
-							<a href="ficheMedia.html"><div class="list">
-								<span class="glyphicon glyphicon-music" aria-hidden="true"></span>
-								<label>Titre: </label><li> Racine carrée</li><br>
-								<label>Auteur: </label> <li> Stromae<li><br>
-								<label>Emprunté par: </label><li> Sarah Gerard</li><br>
-								<label>Date de retour: </label><li> 20/03/2016</li><br>
-							
-							</div></a>
-						</div>
-						<div class="col-xs-6">
-							<a href="ficheMedia.html"><div class="list">
-								<span class="glyphicon glyphicon-film" aria-hidden="true"></span>
-								<label>Titre: </label><li> Les tuches 2</li><br>
-								<label>Auteur: </label> <li> Olivier Baroux<li><br>
-								<label>Emprunté par: </label><li> Pierre Larboulette</li><br>
-								<label>Date de retour: </label><li> 25/04/2016</li><br>
-							
-						</div></a>
 						</div>
 					</div>
 				</div>	

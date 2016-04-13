@@ -1,4 +1,4 @@
-angular.module('ModuleAdherent').service('RechercheAdherentService', ['$http', '$sce', function($http, $sce)
+angular.module('ModuleAdherent').service('RechercheAdherentService', ['$http', function($http)
 {
     var self = this;
     var url = "http://10.34.10.140:8080/resource/adherent.recherche";
