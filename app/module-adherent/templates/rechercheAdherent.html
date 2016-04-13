@@ -88,11 +88,11 @@
 			<table class="hidden-xs table table-hover table-bordered ">
 				<thead>
 					<tr class="entete">
-						<th><a href="">Identifiant <span class="glyphicon glyphicon-triangle-bottom"
+						<th><a ng-click="adhCtrl.tri('id')">Identifiant <span class="glyphicon glyphicon-triangle-bottom"
 								aria-hidden="true"></span></a></th>
-						<th><a href="">Nom <span class="glyphicon glyphicon-triangle-bottom"
+						<th><a ng-click="adhCtrl.tri('nom')">Nom <span class="glyphicon glyphicon-triangle-bottom"
 								aria-hidden="true"></span></a></th>
-						<th><a href="">Prénom <span class="glyphicon glyphicon-triangle-top"
+						<th><a ng-click="adhCtrl.tri('prenom')">Prénom <span class="glyphicon glyphicon-triangle-top"
 								aria-hidden="true"></span></a></th>
 						<th><a href="">Date de naissance <span class="glyphicon glyphicon-triangle-bottom"
 								aria-hidden="true"></span></a></th>
@@ -110,7 +110,7 @@
 					<tr ng-show="adhCtrl.hasErrorAdherent()">
 						<td colspan="4">Erreur lors du chargement du catalogue</td>
 					</tr>
-					<tr onclick="location.href='ficheAdherent.html';" 	ng-repeat="adherent in adhCtrl.listeAdherents">
+					<tr ng-repeat="adherent in adhCtrl.listeAdherents" ng-click="adhCtrl.showAdherent(adherent.id)"	>
 						<td ng-bind="adherent.id"></td>
 						<td ng-bind="adherent.nom"></td>
 						<td ng-bind="adherent.prenom"></td>
