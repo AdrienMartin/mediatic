@@ -1,55 +1,58 @@
 <div ng-controller="ConnexionController as conCtrl">
-<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<!-- Menu Tablette, PC -->
-		<ul class="hidden-xs nav navbar-nav">
-			<li><span class="navbar-brand">Média :</span></li>
-			<li><a href="#/rechercheMedia"><span
-					class="glyphicon glyphicon-search"></span><span class="hidden-sm">
-						Recherche</span></a></li>
-			<li><a href="#/creationMedia"><span
-					class="glyphicon glyphicon-plus"></span><span class="hidden-sm">
-						Création</span></a></li>
-
-			<li><span
-				class="navbar-brand glyphicon glyphicon-option-vertical"></span></li>
-
-			<li><span class="navbar-brand">Adhérent :</span></li>
-			<li><a href="#/rechercheAdherent"><span
-					class="glyphicon glyphicon-search"></span><span class="hidden-sm">
-						Recherche</span></a></li>
-			<li><a href="#/creationAdherent"><span
-					class="glyphicon glyphicon-plus"></span><span class="hidden-sm">
-						Création</span></a></li>
-
-			<li><a ng-click="conCtrl.deconnexion()" href=""><span
-					class="glyphicon glyphicon-log-out"></span><span class="hidden-sm">
-						Déconnexion</span></a></li>
-						
-		</ul>
-
-		<!-- Menu Téléphone -->
-		<ul class="nav navbar-nav visible-xs-block">
-			<li class="col-xs-6 dropdown"><a href="#"
-				class="col-xs-12 dropdown-toggle navbar-brand"
-				data-toggle="dropdown" role="button" aria-haspopup="true"
-				aria-expanded="false">Média <span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#/rechercheMedia"><span
-							class="glyphicon glyphicon-search"></span><span> Recherche</span></a></li>
-					<li><a href="#/creationMedia"><span
-							class="glyphicon glyphicon-plus"></span><span> Création</span></a></li>
-				</ul></li>
-			<li class="col-xs-6 dropdown"><a href="#"
-				class="col-xs-12 dropdown-toggle navbar-brand"
-				data-toggle="dropdown" role="button" aria-haspopup="true"
-				aria-expanded="false">Adhérent <span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#/rechercheAdherent"><span
-							class="glyphicon glyphicon-search"></span><span> Recherche</span></a></li>
-					<li><a href="#/creationAdherent"><span
-							class="glyphicon glyphicon-plus"></span><span> Création</span></a></li>
-				</ul></li>
-		</ul>
+	<div ng-controller="MenuController as menCtrl">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Menu Tablette, PC -->
+				<ul class="hidden-xs nav navbar-nav">
+					<li><span class="navbar-brand">MÃ©dia :</span></li>
+					<li><a ng-click="menCtrl.showMedias()" href=""><span
+							class="glyphicon glyphicon-search"></span><span class="hidden-sm">
+								Recherche</span></a></li>
+					<li><a ng-click="menCtrl.showMedias()" href=""><span
+							class="glyphicon glyphicon-plus"></span><span class="hidden-sm">
+								CrÃ©ation</span></a></li>
+		
+					<li><span
+						class="navbar-brand glyphicon glyphicon-option-vertical"></span></li>
+		
+					<li><span class="navbar-brand">AdhÃ©rent :</span></li>
+					<li><a ng-click="menCtrl.showAdherents()" href=""><span
+							class="glyphicon glyphicon-search"></span><span class="hidden-sm">
+								Recherche</span></a></li>
+					<li><a ng-click="menCtrl.showAdherents()" href=""><span
+							class="glyphicon glyphicon-plus"></span><span class="hidden-sm">
+								CrÃ©ation</span></a></li>
+		
+					<li><a ng-click="conCtrl.deconnexion()" href=""><span
+							class="glyphicon glyphicon-log-out"></span><span class="hidden-sm">
+								DÃ©connexion</span></a></li>
+								
+				</ul>
+		
+				<!-- Menu TÃ©lÃ©phone -->
+				<ul class="nav navbar-nav visible-xs-block">
+					<li class="col-xs-6 dropdown"><a href=""
+						class="col-xs-12 dropdown-toggle navbar-brand"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">MÃ©dia <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a ng-click="menCtrl.showMedias()" href=""><span
+									class="glyphicon glyphicon-search"></span><span> Recherche</span></a></li>
+							<li><a ng-click="menCtrl.showMedias()" href=""><span
+									class="glyphicon glyphicon-plus"></span><span> CrÃ©ation</span></a></li>
+						</ul></li>
+					<li class="col-xs-6 dropdown"><a href=""
+						class="col-xs-12 dropdown-toggle navbar-brand"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">AdhÃ©rent <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a ng-click="menCtrl.showAdherents()" href=""><span
+									class="glyphicon glyphicon-search"></span><span> Recherche</span></a></li>
+							<li><a ng-click="menCtrl.showAdherents()" href=""><span
+									class="glyphicon glyphicon-plus"></span><span> CrÃ©ation</span></a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</nav>
 	</div>
-</nav>
+</div>

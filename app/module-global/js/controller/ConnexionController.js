@@ -18,7 +18,7 @@ module.controller('ConnexionController', ['$http','$scope','$location','Connexio
 	}
 	
 	conCtrl.deconnexion=function(){
-		
+		console.log('deco');
 		ConnexionService.deconnexion();
 	
 	}

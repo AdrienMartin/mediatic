@@ -56,5 +56,4 @@ angular.module('ModuleAdherent').controller('RechercheAdherentController', ['$ht
 	myCtrl.showAdherent = function(id) {
 		$location.path('/adherent/'+id);
 	}
-	
 }]);

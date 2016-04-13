@@ -1,4 +1,4 @@
-angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', '$routeParams', 'FicheMediaService', function($rootScope, $routeParams, FicheMediaService)
+angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', '$routeParams', 'FicheMediaService', '$location', function($rootScope, $routeParams, FicheMediaService, $location)
 {
 	var myCtrl = this;
 	
@@ -69,5 +69,10 @@ angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', 
 	myCtrl.saveEmprunt = function()
 	{
 		console.log('saveEmprunt todo');
+	}
+	
+	myCtrl.showAdherent = function(id)
+	{
+		$location.path('/adherent/'+id);
 	}
 }]);

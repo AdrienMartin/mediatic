@@ -1,73 +1,4 @@
-<script>
-/*	"use strict";
-	//variable de test
-	var dateDispo = new Date(2017, 4, 19);
-	var typeMedia = 'Livre';
-	var titreMedia = 'La Bible';
-	var auteurMedia = 'Jésus de Nazareth';
-	
-	$(function(){
-		initInfo();
-		afficheDateDispo();
-		initDateEmprunt();
-		calculDateRetour();
-
-		// calcul date retour automatique
-		$('input.dateEmprunt').change(function() {
-			var dateRetour = new Date($('input.dateEmprunt').val());
-			dateRetour.setDate(dateRetour.getDate() + 30);
-			$('.dateRetour').val(formaterDateInput(dateRetour));
-		});
-
-
-	});
-	
-	function formaterDate(date)
-	{
-		// format string au format date
-		var day = ("0" + date.getDate()).slice(-2);
-		var month = ("0" + (date.getMonth()+1)).slice(-2);
-		return (day + '/' + month + '/' + date.getFullYear());
-	}
-
-	function formaterDateInput(date){
-		// format string au format date pour l'input Date
-		var day = ("0" + date.getDate()).slice(-2);
-		var month = ("0" + (date.getMonth()+1)).slice(-2);
-		return (date.getFullYear() + '-' + month + '-' + day);
-	}
-	
-	function initDateEmprunt()
-	{
-		var elementDate = $('input.dateEmprunt');
-		if(elementDate != undefined)
-		{
-			if(dateDispo != undefined && dateDispo > new Date())
-			{
-				elementDate.val(formaterDateInput(dateDispo));
-			}
-			else
-			{
-				elementDate.val(formaterDateInput(new Date()));
-			}
-		}
-	}
-
-	function calculDateRetour(){
-		var dateRetour = new Date($('input.dateEmprunt').val());
-		switch (typeMedia)
-		{
-			case "DVD":
-			case "CD":
-				dateRetour.setDate(dateRetour.getDate() + 15);
-				break;
-			case "Livre":
-				dateRetour.setDate(dateRetour.getDate() + 30);
-				break;
-		}
-		$('.dateRetour').val(formaterDateInput(dateRetour));
-	}*/
-</script>
+<div ng-include="'./module-global/templates/header.html'"></div>
 
 <main>
 	<div>
@@ -159,50 +90,32 @@
 								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
 							</th>
 							<th onclick="location.href='#';" style="cursor:pointer;">
-								<span>Date </span>
+								<span>Date d'emprunt</span>
+								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							</th>
+							<th onclick="location.href='#';" style="cursor:pointer;">
+								<span>Date de retour</span>
 								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
 							</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
-							<td data-title="Nom"><span>Arthur</span></td>
-							<td data-title="Prénom"><span>Quentin</span></td>
-							<td data-title="Date"><span>19/06/2015</span></td>
-						</tr>
-						<tr onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
-							<td data-title="Nom"><span>Fort</span></td>
-							<td data-title="Prénom"><span>Mathieu</span></td>
-							<td data-title="Date"><span>25/05/2013</span></td>		
-						</tr>
-						<tr onclick="location.href='ficheAdherent.html';" style="cursor:pointer;">
-							<td data-title="Nom"><span>Link</span></td>
-							<td data-title="Prénom"><span>Zelda</span></td>
-							<td data-title="Date"><span>04/02/2014</span></td>
+						<tr ng-repeat="emprunteur in medCtrl.media.emprunteurs" ng-click="medCtrl.showAdherent(emprunteur.adherent.id)" style="cursor:pointer;">
+							<td data-title="Nom"><span ng-bind="emprunteur.adherent.nom"></span></td>
+							<td data-title="Prénom"><span ng-bind="emprunteur.adherent.prenom"></span></td>
+							<td data-title="Date"><span ng-bind="emprunteur.depart | date:'dd/MM/yyyy'"></span></td>
+							<td data-title="Date"><span ng-bind="emprunteur.retour | date:'dd/MM/yyyy'"></span></td>
 						</tr>
 					</tbody>
 				</table>
 				
 				<div class=" visible-xs-block row" >
-					<div class="col-xs-6">
-						<a href="ficheAdherent.html"><div class="list">
-							<label>Nom :</label><span>Arthur</span><br>
-							<label>Prénom :</label><span>Quentin</span><br>
-							<label>Date :</label><span>19/06/2015</span><br>
-						</div></a>
-					</div>
-					<div class="col-xs-6">
-						<a href="ficheAdherent.html"><div class="list">
-							<label>Nom :</label><span>Fort</span><br>
-							<label>Prénom :</label><span>Mathieu</span><br>
-							<label>Date :</label><span>25/05/2013</span><br>
-						</div></a>
-					</div>
-					<div class="col-xs-6">
-						<a href="ficheAdherent.html"><div class="list">
-							<label>Nom :</label><span>Link</span><br>
-							<label>Prénom :</label><span>Zelda</span><br>
-							<label>Date :</label><span>04/02/2014</span><br>
+					<div ng-repeat="emprunteur in medCtrl.media.emprunteurs" class="col-xs-6">
+						<a ng-click="medCtrl.showAdherent(emprunteur.adherent.id)" href=""><div class="list">
+							<label>Nom :</label><span ng-bind="emprunteur.adherent.nom"></span><br>
+							<label>Prénom :</label><span ng-bind="emprunteur.adherent.prenom"></span><br>
+							<label>Debut :</label><span ng-bind="emprunteur.depart | date:'dd/MM/yyyy'"></span><br>
+							<label>Retour :</label><span ng-bind="emprunteur.retour | date:'dd/MM/yyyy'"></span>
 						</div></a>
 					</div>
 				</div>
