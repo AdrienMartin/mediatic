@@ -28,17 +28,19 @@
 <script src="module-adherent/js/service/adherents.js"></script>
 <script src="module-adherent/js/controller/RechercheAdherentController.js"></script>
 <script src="module-media/js/media.js"></script>
-<script src="module-media/js/controller/MediaController.js"></script>
+<script src="module-media/js/controller/RechercheMediaController.js"></script>
+<script src="module-media/js/controller/FicheMediaController.js"></script>
 <script src="module-media/js/service/Media.js"></script>
 <script src="module-media/js/service/listeMedia.js"></script>
+<script src="module-media/js/service/ficheMedia.js"></script>
 
 
 </head>
 <body class="container" ng-controller="TopController as topCtrl">
-	<div ng-if="topCtrl.isConnected()">
+	<div ng-if="!topCtrl.isConnected()">
 		<ng-view></ng-view>
 	</div>
-	<div ng-if="!topCtrl.isConnected()">
+	<div ng-if="topCtrl.isConnected()">
 		<div ng-include="'./module-global/templates/login.html'"></div>
 	</div>
 	

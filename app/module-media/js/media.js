@@ -8,14 +8,14 @@ angular.module('ModuleMedia').config(function($routeProvider)
 	$routeProvider.when('/rechercheMedia',
 	{
 		templateUrl : './module-media/templates/rechercheMedia.html',
-		controller : 'MediaController',
+		controller : 'RechercheMediaController',
 		controllerAs : 'medCtrl'
 	});
 	
-	$routeProvider.when('/ficheMedia',
+	$routeProvider.when('/ficheMedia/:idMedia',
 	{
 		templateUrl : './module-media/templates/ficheMedia.html',
-		controller : 'MediaController',
+		controller : 'FicheMediaController',
 		controllerAs : 'medCtrl'
 	});
 });
