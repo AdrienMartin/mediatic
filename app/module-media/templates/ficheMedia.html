@@ -36,19 +36,6 @@
 		var month = ("0" + (date.getMonth()+1)).slice(-2);
 		return (date.getFullYear() + '-' + month + '-' + day);
 	}
-
-	
-	function afficheDateDispo()
-	{
-		var elementDate = $('.alert>span.dateDispo');
-		if(elementDate != undefined)
-		{
-			if(dateDispo != undefined)
-			{
-				elementDate.html(formaterDate(dateDispo));
-			}
-		}
-	}
 	
 	function initDateEmprunt()
 	{
@@ -128,9 +115,13 @@
 		</fieldset>
 	</form>
 	
-	<div class="alert alert-success" role="alert">Disponible</div>
-	</br>
-	<div class="alert alert-warning" role="alert">Emprunté par Moïse, sera disponible le <span class="dateDispo">25/05/2016</span></div>
+	<div ng-show="medCtrl.media.emprunteur==undefined" class="alert alert-success" role="alert">Disponible</div>
+	<div ng-show="!(medCtrl.media.emprunteur==undefined)" class="alert alert-warning" role="alert">
+		Emprunté par 
+		<span ng-bind="medCtrl.media.emprunteur.nom + ' ' + medCtrl.media.emprunteur.prenom"></span>
+		, sera disponible le 
+		<span ng-bind="medCtrl.media.retour | date:'dd/MM/yyyy'"></span>
+	</div>
 	
 	<form class="form-inline">
 		<fieldset>

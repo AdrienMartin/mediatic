@@ -10,6 +10,14 @@ angular.module('ModuleMedia').service('FicheMediaService', ['$http',function($ht
 		urlParams.params.id = id;
 		return $http.get(url,urlParams).then(function(response)
 		{
+			var retourTmp = "";
+			
+			if(response.data.retour != undefined)
+			{
+				var regExp1 = new RegExp('[ ]', 'gi');
+				retourTmp = response.data.retour.replace(regExp1, 'T') + 'Z';
+				console.log(new Date(retourTmp));
+			}
 			var media =
 			{
 					id : response.data.id,
@@ -18,7 +26,7 @@ angular.module('ModuleMedia').service('FicheMediaService', ['$http',function($ht
 					type : response.data.type,
 					emprunteur : response.data.emprunteur,
 					emprunteurs : response.data.emprunteurs,
-					retour : (response.data.retour != undefined)?new Date(response.data.retour):""
+					retour : retourTmp
 			};
 			return media;
 		});

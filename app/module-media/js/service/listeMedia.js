@@ -6,6 +6,7 @@ angular.module('ModuleMedia').service('ListeMediaService', ['$http',function($ht
 	self.getPromise = function(params)
 	{
 		var urlParams = {params:{}};
+
 		if(params.titre != undefined)
 		{
 			urlParams.params.titre = params.titre;
@@ -28,6 +29,14 @@ angular.module('ModuleMedia').service('ListeMediaService', ['$http',function($ht
 			for(var index in response.data)
 			{
 				var itemFromServeur = response.data[index];
+				var retourTmp = "";
+				
+				if(itemFromServeur.retour != undefined)
+				{
+					var regExp1 = new RegExp('[ ]', 'gi');
+					retourTmp = itemFromServeur.retour.replace(regExp1, 'T') + 'Z';
+					console.log(new Date(retourTmp));
+				}
 				var itemForIHM =
 				{
 						id : itemFromServeur.id,
@@ -36,7 +45,7 @@ angular.module('ModuleMedia').service('ListeMediaService', ['$http',function($ht
 						type : itemFromServeur.type,
 						emprunteur : itemFromServeur.emprunteur,
 						emprunteurs : itemFromServeur.emprunteurs,
-						retour : (itemFromServeur.retour != undefined)?new Date(itemFromServeur.retour):""
+						retour : retourTmp
 				};
 				medias.push(itemForIHM);
 			}
