@@ -27,5 +27,11 @@ angular.module('ModuleMedia').controller('MediaController', ['$http', '$rootScop
 		});
 	}
 	
+	myCtrl.getListeTriee = function(param)
+	{
+		myCtrl.filters.tri = param;
+		myCtrl.getListe();
+	}
+	
 	myCtrl.getListe();
 }]);

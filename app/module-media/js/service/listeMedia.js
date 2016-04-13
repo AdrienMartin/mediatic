@@ -18,6 +18,10 @@ angular.module('ModuleMedia').service('ListeMediaService', ['$http',function($ht
 		{
 			urlParams.params.type = params.type;
 		}
+		if(params.tri != undefined)
+		{
+			urlParams.params.tri = params.tri;
+		}
 		return $http.get(url,urlParams).then(function(response)
 		{
 			var medias = [];

@@ -36,11 +36,11 @@
 				<table class="hidden-xs table table-hover table-bordered ">
 					<thead>
 						<tr class="entete" >
-							<th><a href="">Type <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
-							<th><a href="">Titre <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
-							<th><a href="">Auteur <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
-							<th ><a href="">Emprunté par <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
-							<th ><a href="">Date de retour <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
+							<th><a href="" ">Type <span ng-if="medCtrl.filters.tri == 'type'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+							<th><a href="" ng-click="medCtrl.getListeTriee('titre')">Titre <span ng-if="medCtrl.filters.tri == 'titre'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+							<th><a href="" ng-click="medCtrl.getListeTriee('auteur')">Auteur <span ng-if="medCtrl.filters.tri == 'auteur'" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
+							<th ><a href="">Emprunté par <span ng-if="medCtrl.filters.tri == 'emprunt'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></th>
+							<th ><a href="">Date de retour <span ng-if="medCtrl.filters.tri == 'retour'" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -54,7 +54,7 @@
 								Erreur lors du chargement de la liste des medias
 							</td>
 						</tr>
-						<tr ng-repeat="media in medCtrl.medias" onclick="location.href='ficheMedia.html';" style="cursor:pointer;">
+						<tr ng-repeat="media in medCtrl.medias" onclick="location.href='#/ficheMedia.html';" style="cursor:pointer;">
 							<td ng-switch on="media.type" data-title="Type">
 								<span ng-switch-when="Livre" class="glyphicon glyphicon-book" aria-hidden="true"></span>
 								<span ng-switch-when="CD" class="glyphicon glyphicon-music" aria-hidden="true"></span>
