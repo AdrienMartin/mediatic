@@ -9,3 +9,11 @@ angular.module('ModuleAdherent').config(function($routeProvider){
 		controllerAs : 'adhCtrl'
 	});
 });
+
+angular.module('ModuleAdherent').config(function($routeProvider){
+	$routeProvider.when('/adherent/:idAdherent', {
+		templateUrl : './module-adherent/templates/ficheAdherent.html',
+		controller : 'FicheAdherentController',
+		controllerAs : 'adhCtrl'
+	});
+});

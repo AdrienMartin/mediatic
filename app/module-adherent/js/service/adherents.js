@@ -17,12 +17,13 @@ angular.module('ModuleAdherent').service('RechercheAdherentService', ['$http', '
                         prenom : itemFromServeur.prenom,
                         date_naissance : new Date(itemFromServeur.date_naissance),
                         cotisation_correcte : itemFromServeur.cotisation_correcte,
-                        emprunt : itemFromServeur.nombre_media
+                        emprunt : itemFromServeur.nombre_media,
+                        medias : itemFromServeur.emprunt
                 };
        
                 adherents.push(itemForIHM);
             }
-            return adherents;
+            return adherents;	
         });
         
     }
