@@ -132,13 +132,13 @@
 			</div>
 			<div class="form-group">
 				<label for="dateEmprunt" class="hidden-xs">Date emprunt</label>
-				<input type="date" class="form-control dateEmprunt" name="dateEmprunt" required="required">
+				<input ng-model="medCtrl.mediaTmp.empruntDebut" ng-change="medCtrl.changeDateRetour()" type="date" class="form-control dateEmprunt" name="dateEmprunt" required="required">
 			</div>
 			<div class="form-group">
 				<label for="dateRetour" class="hidden-xs">Date de retour</label>
-				<input type="date" class="form-control dateRetour" name="dateRetour" readonly>
+				<input ng-model="medCtrl.mediaTmp.empruntRetour" type="date" class="form-control dateRetour" name="dateRetour" readonly>
 			</div>
-			<button type="submit" class="btn btn-default">Ajouter</button>
+			<button ng-click="medCtrl.saveEmprunt()" type="submit" class="btn btn-default">Ajouter</button>
 		</fieldset>
 		</br>
 	</form>

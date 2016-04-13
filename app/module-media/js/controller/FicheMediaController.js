@@ -20,6 +20,15 @@ angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', 
 		myCtrl.mediaTmp.titre = myCtrl.media.titre;
 		myCtrl.mediaTmp.auteur = myCtrl.media.auteur;
 		myCtrl.mediaTmp.type = myCtrl.media.type;
+		if(myCtrl.media.retour != "" && myCtrl.media.retour > new Date())
+		{
+			myCtrl.mediaTmp.empruntDebut = myCtrl.media.retour;
+		}
+		else
+		{
+			myCtrl.mediaTmp.empruntDebut = new Date();
+		}
+		myCtrl.changeDateRetour();
 	}, function(){
 		// En cas d'erreur
 		myCtrl.media = -1;
@@ -36,6 +45,29 @@ angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', 
 		myCtrl.media.titre = myCtrl.mediaTmp.titre;
 		myCtrl.media.auteur = myCtrl.mediaTmp.auteur;
 		myCtrl.media.type = myCtrl.mediaTmp.type;
-		console.log('todo');
+		myCtrl.changeDateRetour();
+		console.log('saveMedia todo');
+	}
+	
+	myCtrl.changeDateRetour = function()
+	{
+		if(myCtrl.mediaTmp.empruntDebut != undefined)
+		{
+			if(myCtrl.media.type == 'CD' || myCtrl.media.type == 'DVD')
+			{
+				myCtrl.mediaTmp.empruntRetour = angular.copy(myCtrl.mediaTmp.empruntDebut);
+				myCtrl.mediaTmp.empruntRetour.setDate(myCtrl.mediaTmp.empruntRetour.getDate() + 15);
+			}
+			else if(myCtrl.media.type == 'Livre')
+			{
+				myCtrl.mediaTmp.empruntRetour = angular.copy(myCtrl.mediaTmp.empruntDebut);
+				myCtrl.mediaTmp.empruntRetour.setDate(myCtrl.mediaTmp.empruntRetour.getDate() + 30);
+			}
+		}
+	}
+	
+	myCtrl.saveEmprunt = function()
+	{
+		console.log('saveEmprunt todo');
 	}
 }]);

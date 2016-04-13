@@ -1,4 +1,4 @@
-angular.module('ModuleMedia').controller('RechercheMediaController', ['$rootScope', 'MediaService', 'ListeMediaService', '$location', function($rootScope, MediaService, ListeMediaService, $location)
+angular.module('ModuleMedia').controller('RechercheMediaController', ['$rootScope', 'MediaService', 'RechercheMediaService', '$location', function($rootScope, MediaService, RechercheMediaService, $location)
 {
 	var myCtrl = this;
 	
@@ -14,7 +14,7 @@ angular.module('ModuleMedia').controller('RechercheMediaController', ['$rootScop
 	myCtrl.getListeTriee = function(param)
 	{
 		myCtrl.filters.tri = param;
-		ListeMediaService.getPromise(myCtrl.filters).then(function(response)
+		RechercheMediaService.getPromise(myCtrl.filters).then(function(response)
 		{
 			myCtrl.medias = response;
 		}, function(){

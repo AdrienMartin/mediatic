@@ -1,4 +1,4 @@
-angular.module('ModuleMedia').service('ListeMediaService', ['$http',function($http)
+angular.module('ModuleMedia').service('RechercheMediaService', ['$http',function($http)
 {
 	var self = this;
 	var url = "http://10.34.10.140:8080/resource/media.recherche";
@@ -29,14 +29,7 @@ angular.module('ModuleMedia').service('ListeMediaService', ['$http',function($ht
 			for(var index in response.data)
 			{
 				var itemFromServeur = response.data[index];
-				var retourTmp = "";
-				
-				if(itemFromServeur.retour != undefined)
-				{
-					var regExp1 = new RegExp('[ ]', 'gi');
-					retourTmp = itemFromServeur.retour.replace(regExp1, 'T') + 'Z';
-					console.log(new Date(retourTmp));
-				}
+
 				var itemForIHM =
 				{
 						id : itemFromServeur.id,
@@ -45,7 +38,7 @@ angular.module('ModuleMedia').service('ListeMediaService', ['$http',function($ht
 						type : itemFromServeur.type,
 						emprunteur : itemFromServeur.emprunteur,
 						emprunteurs : itemFromServeur.emprunteurs,
-						retour : retourTmp
+						retour : (itemFromServeur.retour != undefined)?new Date(itemFromServeur.retour):""
 				};
 				medias.push(itemForIHM);
 			}
