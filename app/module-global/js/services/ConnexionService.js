@@ -12,8 +12,11 @@ myApp.service('ConnexionService',['$http', function($http) {
 			return true;
 		}, function myError(response) {
 			
-	        //res=response.statusText;
-	        console.log(response.statusText)
+	        console.log(response.statusText);
+	        if(response.statut==400){
+	        
+	        }
+	        
 			return false;
 	    });
 		
@@ -21,6 +24,10 @@ myApp.service('ConnexionService',['$http', function($http) {
 	this.isConnected=function(){
 		
 		return con;
+	}
+	this.deconnexion=function(){
+		con=false;
+	
 	}
 	
 }]);

@@ -9,12 +9,18 @@ module.controller('ConnexionController', ['$http','$scope','$location','Connexio
 		 var mdp=$scope.mdp;
 		
 		 ConnexionService.connexion(login,mdp).then(function(response){
-			 if(response==undefined){
+			 if(!response){
 				 $scope.res="Vos identifiants sont incorrect, veuillez ressaisir vos identifiants";
 			 } else {
 				 $scope.res = undefined;
 			 }
 		});
+	}
+	
+	conCtrl.deconnexion=function(){
+		
+		ConnexionService.deconnexion();
+	
 	}
 }]);
 	

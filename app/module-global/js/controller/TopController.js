@@ -7,6 +7,7 @@ module.controller('TopController', ['ConnexionService', function(ConnexionServic
 		return ConnexionService.isConnected();
 	}
 	
+	
 }]);
 	
 
