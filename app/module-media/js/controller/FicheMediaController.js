@@ -5,7 +5,7 @@ angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', 
 	// Je défini l'attribut PAGE pas si il n'ai pas déjà défini
 	$rootScope.page = $rootScope.page || {};
 	// Je défini l'attribut TITRE de PAGE
-	$rootScope.page.titre = "Media";
+	$rootScope.page.titre = "Fiche média";
 
 	myCtrl.media = undefined;
 	myCtrl.mediaTmp = {};

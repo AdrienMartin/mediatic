@@ -41,14 +41,15 @@
 <script src="module-media/js/service/Media.js"></script>
 <script src="module-media/js/service/rechercheMedia.js"></script>
 <script src="module-media/js/service/ficheMedia.js"></script>
+<script src="module-media/js/service/creationMedia.js"></script>
 
 
 </head>
 <body class="container" ng-controller="TopController as topCtrl">
-	<div ng-if="topCtrl.isConnected()">
+	<div ng-if="!topCtrl.isConnected()">
 		<ng-view></ng-view>
 	</div>
-	<div ng-if="!topCtrl.isConnected()">
+	<div ng-if="topCtrl.isConnected()">
 		<div ng-include="'./module-global/templates/login.html'"></div>
 	</div>
 	

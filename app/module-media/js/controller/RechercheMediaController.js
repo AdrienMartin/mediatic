@@ -5,7 +5,7 @@ angular.module('ModuleMedia').controller('RechercheMediaController', ['$rootScop
 	// Je défini l'attribut PAGE pas si il n'ai pas déjà défini
 	$rootScope.page = $rootScope.page || {};
 	// Je défini l'attribut TITRE de PAGE
-	$rootScope.page.titre = "Medias";
+	$rootScope.page.titre = "Recherche de médias";
 	
 	myCtrl.filters = MediaService.get('rechercheFilters');
 
