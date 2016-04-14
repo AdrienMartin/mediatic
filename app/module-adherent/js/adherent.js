@@ -1,5 +1,5 @@
 
-// Création du module ModuleCatalogue
+// Création du module ModuleAdherent
 angular.module('ModuleAdherent', ['ngRoute']);
 
 angular.module('ModuleAdherent').config(function($routeProvider){
@@ -14,6 +14,14 @@ angular.module('ModuleAdherent').config(function($routeProvider){
 	$routeProvider.when('/adherent/:idAdherent', {
 		templateUrl : './module-adherent/templates/ficheAdherent.html',
 		controller : 'FicheAdherentController',
+		controllerAs : 'adhCtrl'
+	});
+});
+
+angular.module('ModuleAdherent').config(function($routeProvider){
+	$routeProvider.when('/creationAdherent', {
+		templateUrl : './module-adherent/templates/creationAdherent.html',
+		controller : 'CreationAdherentController',
 		controllerAs : 'adhCtrl'
 	});
 });

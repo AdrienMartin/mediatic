@@ -11,4 +11,15 @@ angular.module('ModuleApp').controller('MenuController', ['$location', function(
 	{
 		$location.path('/rechercheMedia');
 	}
+	
+	myCtrl.showCreationMedias = function()
+	{
+		$location.path('/creationMedia');
+	}
+	
+	
+	myCtrl.showCreationAdherents = function()
+	{
+		$location.path('/creationAdherent');
+	}
 }]);
