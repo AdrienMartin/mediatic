@@ -9,7 +9,7 @@ angular.module('ModuleMedia').service('CreationMediaService', ['$http',function(
 		urlParams.params.titre = media.titre;
 		urlParams.params.auteur = media.auteur;
 		urlParams.params.type = media.type;
-		console.log('todo');
+		console.log('todo creation media');
 		return $http.post(url,urlParams).then(function(response)
 		{
 			return true;

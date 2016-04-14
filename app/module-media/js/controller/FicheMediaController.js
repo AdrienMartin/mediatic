@@ -42,11 +42,21 @@ angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', 
 	
 	myCtrl.saveMedia = function()
 	{
+		var result = undefined;
+		
 		myCtrl.media.titre = myCtrl.mediaTmp.titre;
 		myCtrl.media.auteur = myCtrl.mediaTmp.auteur;
 		myCtrl.media.type = myCtrl.mediaTmp.type;
+		
 		myCtrl.changeDateRetour();
-		console.log('saveMedia todo');
+		
+		FicheMediaService.setPromiseMedia(myCtrl.media).then(function(response)
+		{
+			result = response;
+		}, function(){
+			// En cas d'erreur
+			result = -1;
+		});
 	}
 	
 	myCtrl.changeDateRetour = function()

@@ -2,6 +2,7 @@ angular.module('ModuleMedia').service('FicheMediaService', ['$http',function($ht
 {
 	var self = this;
 	var url = "http://10.34.10.140:8080/resource/media.accession";
+	var urlMedia = "http://10.34.10.140:8080/resource/media.modification";
 	
 	// Appelle le serveur pour recuperer un media
 	self.getPromise = function(id)
@@ -22,5 +23,22 @@ angular.module('ModuleMedia').service('FicheMediaService', ['$http',function($ht
 			};
 			return media;
 		});
+	}
+	
+	self.setPromiseMedia = function(media)
+	{
+		var urlParams = {params:{}};
+		urlParams.params.id = media.id;
+		urlParams.params.titre = media.titre;
+		urlParams.params.auteur = media.auteur;
+		urlParams.params.type = media.type;
+		console.log('todo modif media');
+		return $http.post(urlMedia,urlParams).then(function(response)
+		{
+			return true;
+		}, function myError(response){
+			console.log(response.statusText);
+			return false;
+	    });
 	}
 }]);
