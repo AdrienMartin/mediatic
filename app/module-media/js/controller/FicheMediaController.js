@@ -1,4 +1,4 @@
-angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', '$routeParams', 'FicheMediaService', '$location', function($rootScope, $routeParams, FicheMediaService, $location)
+angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', '$routeParams', 'FicheMediaService', '$location', 'RechercheAdherentService', 'EmpruntService', function($rootScope, $routeParams, FicheMediaService, $location, RechercheAdherentService, EmpruntService)
 {
 	var myCtrl = this;
 	
@@ -9,6 +9,11 @@ angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', 
 
 	myCtrl.media = undefined;
 	myCtrl.mediaTmp = {};
+	
+	var listeAdherents = [];
+	myCtrl.listeAdherentsTmp = [];
+	myCtrl.adherentId = undefined;
+	myCtrl.filtreAdherent = "";
 	
 	// Récuparation du l'identifiant qui est le paramètre 'idMedia' de la route
 	var id = $routeParams.idMedia;
@@ -40,6 +45,41 @@ angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', 
 		return !(myCtrl.media===undefined);
 	}
 	
+	// -------------------------------------------------------------------------
+	
+	RechercheAdherentService.getListe().then(function(response)
+	{
+		for(index in response)
+		{
+			if(response[index].cotisation_correcte == true)
+			listeAdherents.push(response[index]);
+			myCtrl.listeAdherentsTmp = listeAdherents;
+		}
+		
+	}, function(){
+		// En cas d'erreur
+		listeAdherents = -1;
+	});
+	
+	myCtrl.hasErrorAdherents = function(){
+		return listeAdherents===-1;
+	}
+	
+	myCtrl.changeListeAdherent = function()
+	{
+		myCtrl.listeAdherentsTmp = [];
+		for(index in listeAdherents)
+		{
+			var nomPrenom = listeAdherents[index].nom.toLowerCase() + ' ' + listeAdherents[index].prenom.toLowerCase()
+			if(nomPrenom.indexOf(myCtrl.filtreAdherent.toLowerCase()) != -1)
+			{
+				myCtrl.listeAdherentsTmp.push(listeAdherents[index]);
+			}
+		}
+	}
+	
+	// -------------------------------------------------------------------------
+	
 	myCtrl.saveMedia = function()
 	{
 		var result = undefined;
@@ -58,6 +98,8 @@ angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', 
 			result = -1;
 		});
 	}
+	
+	// -------------------------------------------------------------------------
 	
 	myCtrl.changeDateRetour = function()
 	{
@@ -78,7 +120,21 @@ angular.module('ModuleMedia').controller('FicheMediaController', ['$rootScope', 
 	
 	myCtrl.saveEmprunt = function()
 	{
-		console.log('saveEmprunt todo');
+		if(myCtrl.adherentId != undefined && myCtrl.mediaTmp.empruntDebut != undefined)
+		{
+			var result = undefined;
+			var emprunt = {};
+			emprunt.idMedia = myCtrl.media.id;
+			emprunt.idAdherent = myCtrl.adherentId;
+			emprunt.dateDebut = myCtrl.mediaTmp.empruntDebut;
+			EmpruntService.setPromise(emprunt).then(function(response)
+			{
+				result = response;
+			}, function(){
+				// En cas d'erreur
+				result = -1;
+			});
+		}
 	}
 	
 	myCtrl.showAdherent = function(id)

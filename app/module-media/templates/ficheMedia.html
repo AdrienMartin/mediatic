@@ -54,12 +54,14 @@
 		<span ng-bind="medCtrl.media.retour | date:'dd/MM/yyyy'"></span>
 	</div>
 	
-	<form class="form-inline">
+	<form ng-submit="medCtrl.saveEmprunt()" class="form-inline">
 		<fieldset>
 			<legend>Ajouter un prêt</legend>
 			<div class="form-group">
+				<label for="filtre" class="hidden-xs">filtre</label>
+				<input ng-model="medCtrl.filtreAdherent" ng-change="medCtrl.changeListeAdherent()" type="text" class="form-control" placeholder="Filtre nom" name="filtre">
 				<label for="nom" class="hidden-xs">Nom</label>
-				<input type="text" class="form-control" placeholder="Nom" name="nom" required="required">
+				<select ng-model="medCtrl.adherentId" ng-options="adherent.id as (adherent.nom +' '+ adherent.prenom) for adherent in medCtrl.listeAdherentsTmp" name="nom" required="required" class="form-control"></select>
 			</div>
 			<div class="form-group">
 				<label for="dateEmprunt" class="hidden-xs">Date emprunt</label>
@@ -69,7 +71,7 @@
 				<label for="dateRetour" class="hidden-xs">Date de retour</label>
 				<input ng-model="medCtrl.mediaTmp.empruntRetour" type="date" class="form-control dateRetour" name="dateRetour" readonly>
 			</div>
-			<button ng-click="medCtrl.saveEmprunt()" type="submit" class="btn btn-default">Ajouter</button>
+			<button type="submit" class="btn btn-default">Ajouter</button>
 		</fieldset>
 		</br>
 	</form>
