@@ -70,6 +70,19 @@
 					</tbody>
 				</table>
 				
+				<nav>
+				<ul class="pagination">
+					<li><a href="" aria-label="Previous" ng-click="medCtrl.changePage(medCtrl.pageCourante-1)"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+					<li ng-repeat="n in medCtrl.listePages">
+					<a href="" ng-bind="n+1" ng-click="medCtrl.changePage(n)"></a>
+					</li>
+					<li><a href="" aria-label="Next" ng-click="medCtrl.changePage(medCtrl.pageCourante+1)"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
+				
+				
 				<div class=" visible-xs-block row" >
 					<div ng-repeat="media in medCtrl.medias" class="col-xs-6">
 						<a href="ficheMedia.html">

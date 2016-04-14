@@ -8,21 +8,33 @@ angular.module('ModuleMedia').controller('RechercheMediaController', ['$rootScop
 	$rootScope.page.titre = "Recherche de médias";
 	
 	myCtrl.filters = MediaService.get('rechercheFilters');
+	
 
+	myCtrl.pageCourante = 0;
+	myCtrl.nbPages = 1;
+	
 	myCtrl.medias = undefined;
 	
-	myCtrl.getListeTriee = function(param)
+	myCtrl.getListeTriee = function(tri)
 	{
-		myCtrl.filters.tri = param;
-		RechercheMediaService.getPromise(myCtrl.filters).then(function(response)
-		{
+		myCtrl.filters.tri = tri;
+		
+		RechercheMediaService.getPromise(myCtrl.filters).then(function(response){
 			myCtrl.medias = response;
 		}, function(){
-			// En cas d'erreur
 			myCtrl.medias = -1;
+		});
+		
+		RechercheMediaService.getNbPages(myCtrl.filters).then(function(response) {
+			myCtrl.listePages = response;
+			myCtrl.nbPages = myCtrl.listePages.length;
+		}, function(){
+			// En cas d'erreur
+			myCtrl.pages = -1;
 		});
 	}
 	
+	myCtrl.filters.page = 0;
 	myCtrl.getListeTriee();
 	
 	myCtrl.hasErrorMedias = function()
@@ -33,5 +45,17 @@ angular.module('ModuleMedia').controller('RechercheMediaController', ['$rootScop
 	myCtrl.showMedia = function(id)
 	{
 		$location.path('/ficheMedia/'+id);
+	}
+	
+	myCtrl.changePage = function(n) {
+		if (n<0) {
+			n=0;
+		}
+		if (n>=myCtrl.nbPages) {
+			n=myCtrl.nbPages-1;
+		}
+		myCtrl.pageCourante = n;
+		myCtrl.filters.page = n;
+		myCtrl.getListeTriee();
 	}
 }]);

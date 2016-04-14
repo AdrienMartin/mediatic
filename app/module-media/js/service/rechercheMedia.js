@@ -1,10 +1,11 @@
 angular.module('ModuleMedia').service('RechercheMediaService', ['$http',function($http)
 {
 	var self = this;
-	var url = "http://10.34.10.140:8080/resource/media.recherche";
+	
 
 	self.getPromise = function(params)
 	{
+		var url = "http://10.34.10.140:8080/resource/media.recherche";
 		var urlParams = {params:{}};
 
 		if(params.titre != undefined)
@@ -22,6 +23,10 @@ angular.module('ModuleMedia').service('RechercheMediaService', ['$http',function
 		if(params.tri != undefined)
 		{
 			urlParams.params.tri = params.tri;
+		}
+		if(params.page != undefined)
+		{
+			urlParams.params.page = params.page;
 		}
 		return $http.get(url,urlParams).then(function(response)
 		{
@@ -45,4 +50,39 @@ angular.module('ModuleMedia').service('RechercheMediaService', ['$http',function
 			return medias;
 		});
 	}
+	
+	self.getNbPages = function(params)
+    {
+    	var url = "http://10.34.10.140:8080/resource/media.recherche.taille";
+    	var urlParams = {params:{}};
+
+		if(params.titre != undefined)
+		{
+			urlParams.params.titre = params.titre;
+		}
+		if(params.auteur != undefined)
+		{
+			urlParams.params.auteur = params.auteur;
+		}
+		if(params.type != undefined)
+		{
+			urlParams.params.type = params.type;
+		}
+		if(params.tri != undefined)
+		{
+			urlParams.params.tri = params.tri;
+		}
+		if(params.page != undefined)
+		{
+			urlParams.params.page = params.page;
+		}
+    	return $http.get(url, urlParams).then(function(response)
+        {
+    		var pages = [];
+    		for (var i = 0; i<response.data.pages; i++){
+    			pages.push(i);
+    		}
+    		return pages;
+        });   
+    }
 }]);
