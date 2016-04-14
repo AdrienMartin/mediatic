@@ -10,16 +10,24 @@ angular.module('ModuleAdherent').controller('RechercheAdherentController', ['$ht
 	
 	myCtrl.listeAdherents = undefined;
 	
+	myCtrl.pageCourante = 0;
 	
 	myCtrl.filter = MemoryFilter.get('filtersRechercheAdherent');
 	
 	var id = $routeParams.idAdherent;
 	
-	RechercheAdherentService.getListe().then(function(response) {
-		myCtrl.listeAdherents = response;
+	RechercheAdherentService.getListe({page:0}).then(function(response) {
+		myCtrl.listeAdherents = response;		
 	}, function(){
 		// En cas d'erreur
 		myCtrl.listeAdherents = -1;
+	});
+	
+	RechercheAdherentService.getPages().then(function(response) {
+		myCtrl.listePages = response;
+	}, function(){
+		// En cas d'erreur
+		myCtrl.pages = -1;
 	});
 	
 	myCtrl.hasErrorAdherent = function(){
@@ -38,12 +46,28 @@ angular.module('ModuleAdherent').controller('RechercheAdherentController', ['$ht
 		if (myCtrl.filter.id != undefined) {
 			params.id = myCtrl.filter.id;
 		}
+			
 		if (myCtrl.filter.texte != undefined) {
 			params.texte = myCtrl.filter.texte;
 		}
+			
+		RechercheAdherentService.getPages(params).then(function(response) {
+			myCtrl.listePages = response;
+		}, function(){
+			// En cas d'erreur
+			myCtrl.pages = -1;
+		});
+		
 		if (myCtrl.filter.tri != undefined) {
 			params.tri = myCtrl.filter.tri;
 		}
+		
+		if (myCtrl.filter.page != undefined) {
+			params.page = myCtrl.filter.page;
+		} else {
+			params.page = 0;
+		}
+		
 		RechercheAdherentService.getListe(params).then(function(response) {
 			myCtrl.listeAdherents = response;
 		}, function(){
@@ -56,4 +80,10 @@ angular.module('ModuleAdherent').controller('RechercheAdherentController', ['$ht
 	myCtrl.showAdherent = function(id) {
 		$location.path('/adherent/'+id);
 	}
+	
+	myCtrl.changePage = function(n) {
+		myCtrl.filter.page = n;
+		myCtrl.rechercher();
+	}
+	
 }]);
