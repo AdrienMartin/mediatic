@@ -115,22 +115,33 @@
 		</fieldset>
 	</form>
 
-	<form class="form-inline">
+	<form ng-submit="adhCtrl.ajoutEmprunt()" class="form-inline">
 		<fieldset>
     		<legend>Ajouter un média emprunté</legend>
 			<div class="form-group">
 				<label for="titre" class="hidden-xs">Titre</label>
-				<input type="text" class="form-control" placeholder="Titre" name="titre" required="required">
+				<!-- <input list="medias" ng-model="adhCtrl.titre"  ng-change="adhCtrl.initDate()" type="text" class="form-control" placeholder="Titre" name="titre" required="required">
+				  <datalist id="medias">	
+						<!--  <option  id="{{elmt.id}}" data-ng-repeat="elmt in adhCtrl.medias" value="{{elmt.titre}}">
+						 <select id="_select" name="_select" ng-model="selectedMedia" ng-options='k.id as k.titre for k in adhCtrl.medias'></select>
+					
+				</datalist> -->  
+				 <input ng-model="adhCtrl.filtreMedia"  ng-change="adhCtrl.searchMedias()" type="text" class="form-control" placeholder="Titre" name="titre" >
+				 <select class="form-control"  id="_select" name="_select" ng-change="adhCtrl.initDate()" ng-model="adhCtrl.idMedia" ng-options='k.id as k.titre for k in adhCtrl.mediasTmp'></select>
+					
+				
+				
 			</div>
 			<div class="form-group">
 				<label for="dateEmprunt" class="hidden-xs">Date emprunt</label>
-				<input type="date" class="form-control dateEmprunt" name="dateEmprunt" required="required">
+				<input  ng-model="adhCtrl.dateEmprunt" type="date" class="form-control dateEmprunt" name="dateEmprunt" required="required">
+				
 			</div>
 			<div class="form-group">
 				<label for="dateRetour" class="hidden-xs">Date de retour</label>
-				<input type="date" class="form-control dateRetour" name="dateRetour" readonly>
+				<input ng-model="adhCtrl.dateRetour" type="date" class="form-control dateRetour" name="dateRetour" readonly>
 			</div>
-			<button type="submit" class="btn btn-default">Ajouter</button>
+			<input  type="submit" class="btn btn-default" value="Ajouter">
 		</fieldset>
 		</br>
 	</form>
