@@ -11,6 +11,7 @@ angular.module('ModuleAdherent').controller('RechercheAdherentController', ['$ht
 	myCtrl.listeAdherents = undefined;
 	
 	myCtrl.pageCourante = 0;
+	myCtrl.nbPages = 1;
 	
 	myCtrl.filter = MemoryFilter.get('filtersRechercheAdherent');
 	
@@ -25,6 +26,7 @@ angular.module('ModuleAdherent').controller('RechercheAdherentController', ['$ht
 	
 	RechercheAdherentService.getPages().then(function(response) {
 		myCtrl.listePages = response;
+		myCtrl.nbPages = myCtrl.listePages.length;
 	}, function(){
 		// En cas d'erreur
 		myCtrl.pages = -1;
@@ -82,6 +84,13 @@ angular.module('ModuleAdherent').controller('RechercheAdherentController', ['$ht
 	}
 	
 	myCtrl.changePage = function(n) {
+		if (n<0) {
+			n=0;
+		}
+		if (n>=myCtrl.nbPages) {
+			n=myCtrl.nbPages-1;
+		}
+		myCtrl.pageCourante = n;
 		myCtrl.filter.page = n;
 		myCtrl.rechercher();
 	}

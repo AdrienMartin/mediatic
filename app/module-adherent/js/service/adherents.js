@@ -30,11 +30,9 @@ angular.module('ModuleAdherent').service('RechercheAdherentService', ['$http', f
     
     self.getPages = function(params)
     {
-		
     	var url = "http://10.34.10.140:8080/resource/adherent.recherche.taille";
     	return $http.get(url, {params:params}).then(function(response)
         {
-    		console.log(response);
     		var pages = [];
     		for (var i = 0; i<response.data.pages; i++){
     			pages.push(i);
